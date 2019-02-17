@@ -6,3 +6,16 @@
   color: red;
   text-align: center;
 }
+.container{
+  display: grid;
+  grid-template-columns:auto 20em auto;
+  grid-template-rows: auto 35em auto;
+  justify-items: center;
+  align-items: center;
+}
+.login{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
