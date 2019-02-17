@@ -1,0 +1,43 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content 
+  padding 
+  class="background"
+  >
+  <ion-grid>
+    <ion-row align-items-center>  
+        <ion-col align-self-center >
+          <ion-card color="primary">
+              <ion-card-header>
+                <ion-card-title>
+                  Iniciar sesión
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content color="primary">
+                <ion-item color="primary">
+                  <ion-label position="floating">
+                  Usuario
+                </ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+                <ion-item color="primary">
+                  <ion-label position="floating">
+                    Contraseña
+                  </ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+                <ion-button 
+                  (click)="tabsValidation()"
+                  color="danger"
+                >
+                  Iniciar
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col> 
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

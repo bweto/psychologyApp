@@ -1,0 +1,12 @@
+[{
+  "datosPasiente":{
+    "nombre": "Nombre",
+    "apellido": "Apellidos",
+    "direccion": "Dirección",
+    "telefono": "Telefono",
+    "email": "Correo Eléctronico",
+    "edad": "Edad",
+    "estadoCivil": "Estado Civil",
+    "genero": "Genero"
+  }
+}]
