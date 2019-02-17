@@ -20,7 +20,7 @@ import { LoginPageModule } from './login/login.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    LoginPageModule
+    LoginPageModule,
   ],
   providers: [
     StatusBar,
