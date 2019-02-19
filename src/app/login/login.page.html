@@ -22,7 +22,7 @@
                   Usuario
                 </ion-label>
                   <ion-input  type="text" 
-                            formController="email">
+                            formControlName="email">
                   </ion-input>
                 </ion-item>
                 <div class="error-messages">
@@ -37,7 +37,7 @@
                     Contraseña
                   </ion-label>
                   <ion-input  type="password" 
-                             formController="password">
+                             formControlName=password>
                   </ion-input>
                 </ion-item>
                 <div class="error-messages">
@@ -48,12 +48,11 @@
                     </ng-container>
                   </div>
                 <ion-button 
-                  [disabled]="loginForm.valid"
+                  [disabled]="!loginForm.valid"
                   shape="round"
                   expand="block"
                   color="danger"
                   (click)="login()"
-
                 >
                   Iniciar
                 </ion-button>

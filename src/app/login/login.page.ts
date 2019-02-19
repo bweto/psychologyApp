@@ -25,28 +25,27 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('', Validators.compose([
+      email: ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(45),
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')
-      ])),
+      ]],
       password: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(10)
       ]))
     });
-   }
+  }
 
-  ngOnInit() {}
-
-   login() {
+   login(l) {
     console.log(`email: ${this.loginForm.value.email}`);
     console.log(`password: ${this.loginForm.value.password}`);
-    console.log(`valido: ${this.loginForm.valid}`);
     this.router.navigate(['../tabs/tab1']);
   }
 
