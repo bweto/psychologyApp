@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-   login(l) {
+   login() {
     console.log(`email: ${this.loginForm.value.email}`);
     console.log(`password: ${this.loginForm.value.password}`);
     this.router.navigate(['../tabs/tab1']);
