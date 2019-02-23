@@ -1,17 +1,75 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <h1 class="title">FORMULARIO</h1>
-
+  <ion-toolbar color="dark">
+    <ion-title color="primary">
+        <ion-icon  name="today" ></ion-icon>
+      Formularios
     </ion-title>
-
   </ion-toolbar>
 
 </ion-header>
-
-<h2 class="title">Historia de casos de psicologia</h2><br>
-<h3 class="title">Crear nueva historia</h3><br>
-<ion-button shape="round" color="success">Crear</ion-button><br><br>
-
-<h2 class="title">Editar historia</h2><br>
-<ion-button shape="round" color="warning">Editar historia</ion-button><br><br>
+<ion-content class="bg">
+  <ion-grid>
+    <ion-row>
+        <ion-card class="card-bg">
+            <ion-card-header class="card-h">
+              <ion-card-subtitle class="card-h">
+                
+                Formularios
+              </ion-card-subtitle>
+              <ion-card-title>
+                <ion-icon name="bookmark"></ion-icon>
+                Control</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content >
+              En esta pestaña puedes encontra las opciones para crear pacientes y buscar Formularios,
+              estos formularios cuentan con caracteristicas especiales dependiendo el tipo de cita.
+            </ion-card-content>
+          </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button class="btn-bg">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          Registrar
+        </ion-button>
+      </ion-col>
+      <ion-col>
+          <ion-button class="btn-bg">
+            <ion-icon name="search"></ion-icon>
+            Buscar
+          </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-card class="card-bg">
+            <ion-card-header >
+              <ion-card-subtitle class="card-h">
+                Primera cita
+              </ion-card-subtitle>
+              <ion-card-title>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                        <ion-icon name="bookmark"></ion-icon>
+                        Tipologia del paciente
+                    </ion-col>
+                    <ion-col>
+                      <ion-button shape="round" class="btn-bg">
+                        <ion-icon name="paper-plane"></ion-icon>
+                      </ion-button>
+                    
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                  
+              </ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Con este formulario podras anotar caracteristics especiales que se detecten del paciente.
+            </ion-card-content>
+          </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
