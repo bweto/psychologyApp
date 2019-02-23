@@ -1,4 +1,5 @@
 <ion-header>
+<<<<<<< HEAD
   <ion-toolbar>
     <ion-title><ion-button color="danger" (click)="salir()">
         <ion-icon name="arrow-round-back"></ion-icon>
@@ -32,27 +33,97 @@
       Nombre del paciente
     </ion-label>
     <ion-input  type="text" ></ion-input>
+=======
+    <ion-toolbar>
+      <ion-title>registration</ion-title>
+    </ion-toolbar>
+  </ion-header>
+>>>>>>> 8822bc676b42056ea8b63f4ed92eb299472932ff
   
-    <ion-label position="floating">
-      Edad
-    </ion-label>
-    <ion-input  type="text" ></ion-input>
+  <ion-content padding>
   
-    <ion-label position="floating">
-      Sexo
-    </ion-label>
-    <ion-input  type="text" ></ion-input>
-  
-    <ion-label position="floating">
-      Edad
-    </ion-label>
-    <ion-input  type="text" ></ion-input><ion-label position="floating">
-      Curso
-    </ion-label>
-    <ion-input  type="text" ></ion-input>
-  
+    <ion-card color="secondary">
+      <ion-card-header>
+        <ion-card-title>
+          Cologio Nuestra Señora de las Mercedes
+        </ion-card-title>
+      </ion-card-header>
+          
+      <ion-card-header>
+        <ion-card-title>
+          Psicologo Tonny Meola
+        </ion-card-title>
+      </ion-card-header>
     
+      
     
+      <ion-card-title>
+        Datos del estudiante
+      </ion-card-title>
+      <ion-label position="floating">
+        Nombre del estudiante:
+      </ion-label>
+      <ion-input  type="text" ></ion-input>
+    
+      <ion-label position="floating">
+        Edad:
+      </ion-label>
+      <ion-input  type="text" ></ion-input>
+    
+      <ion-label position="floating">
+        Sexo:
+      </ion-label>
+      <ion-input  type="text" ></ion-input>
+      
+      
+      <ion-label position="floating">
+          Curso:
+        </ion-label>
+        <ion-input  type="text" ></ion-input>
+    
+
+        <ion-card-title>
+          Datos familiares
+        </ion-card-title>
+
+          <ion-label position="floating">
+            Nombre de la mamá:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Numeros telefonicos:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Direccion de recidencia:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Nombre del papá:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Numeros telefonicos:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Direccion de recidencia:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+          <ion-label position="floating">
+            Nombre del acudiente:
+          </ion-label>
+          <ion-input  type="text" ></ion-input>
+
+      
+    
+<<<<<<< HEAD
     <ion-button 
     shape="round"
     expand="block"
@@ -61,7 +132,50 @@
   >
     Terminar formulario
   </ion-button>
+=======
+          </ion-card>
+>>>>>>> 8822bc676b42056ea8b63f4ed92eb299472932ff
   
-        </ion-card>
+          <ion-card color="default">
 
-</ion-content>
+                <ion-label position="floating">
+                        Fecha y hora
+                      </ion-label>
+                      <ion-input  type="text" ></ion-input>
+
+                      <ion-label position="floating">
+                            Caso numero:
+                          </ion-label>
+                          <ion-input  type="text" ></ion-input>
+
+                      <ion-label position="floating">
+                            Motivo de la cita:
+                          </ion-label>
+                          <ion-input  type="text" ></ion-input>
+
+                          <ion-label position="floating">
+                                Caso:
+                              </ion-label>
+                              <ion-input  type="text" ></ion-input>
+
+                              <ion-label position="floating">
+                                    Remitir a:
+                                  </ion-label>
+                                  <ion-input  type="text" ></ion-input>
+
+                                  <ion-label position="floating">
+                                        Anexos
+                                      </ion-label>
+                                      <ion-input  type="text" ></ion-input>
+
+          </ion-card>
+
+          <ion-button 
+      [disabled]="!loginForm.valid"
+      shape="round"
+      expand="block"
+      color="danger"
+      (click)="login()"
+    >
+      Terminar formulario
+    </ion-button>
