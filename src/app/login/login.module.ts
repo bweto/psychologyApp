@@ -12,15 +12,6 @@ const routes: Routes = [
     path: '',
     component: LoginPage,
     children: [
-      {
-        path: 'login1',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
-          }
-        ]
-  },
   {
     path: '',
     redirectTo: '/login',

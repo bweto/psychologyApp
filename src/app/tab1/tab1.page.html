@@ -1,8 +1,20 @@
 <ion-header>
   <ion-toolbar color="danger">
     <ion-title >
-        <ion-icon name="clipboard"></ion-icon>
-      Reportes de Psicología 
+      <ion-grid>
+        <ion-row class="justify-content-around">
+          <ion-col>
+              <ion-icon name="clipboard"></ion-icon>
+              Reportes de Psicología 
+          </ion-col>
+          <ion-col>
+              <ion-button color="danger" (click)="salir()">
+                  <ion-icon name="exit"></ion-icon>
+              </ion-button>
+              
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-title>
   </ion-toolbar>
 </ion-header>

@@ -3,6 +3,7 @@
     <ion-title color="primary">
         <ion-icon  name="today" ></ion-icon>
       Formularios
+      
     </ion-title>
   </ion-toolbar>
 
@@ -13,7 +14,6 @@
         <ion-card class="card-bg">
             <ion-card-header class="card-h">
               <ion-card-subtitle class="card-h">
-                
                 Formularios
               </ion-card-subtitle>
               <ion-card-title>
@@ -29,8 +29,9 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button class="btn-bg">
-          <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-button class="btn-bg" (click)="registro()">
+          <ion-icon name="add-circle-outline"
+                    ></ion-icon>
           Registrar
         </ion-button>
       </ion-col>
@@ -55,7 +56,7 @@
                         Tipologia del paciente
                     </ion-col>
                     <ion-col>
-                      <ion-button shape="round" class="btn-bg">
+                      <ion-button shape="round" class="btn-bg" (click)="form()">
                         <ion-icon name="paper-plane"></ion-icon>
                       </ion-button>
                     

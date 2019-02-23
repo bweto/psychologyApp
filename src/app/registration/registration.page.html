@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>registration</ion-title>
+    <ion-title><ion-button color="danger" (click)="salir()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+    </ion-button>registro</ion-title>
+    
+
   </ion-toolbar>
 </ion-header>
 
@@ -50,7 +54,6 @@
     
     
     <ion-button 
-    [disabled]="!loginForm.valid"
     shape="round"
     expand="block"
     color="danger"
