@@ -11,4 +11,8 @@ export class PacientesService {
    getPacientes() {
     return this.http.get('https://randomuser.me/api/?results=15');
    }
+
+   getLocalPatient(){
+     return this.http.get('../data/dataPatients.json');
+   }
 }
