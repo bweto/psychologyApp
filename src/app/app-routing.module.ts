@@ -7,7 +7,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
   { path: 'form-paciente', loadChildren: './form-paciente/form-paciente.module#FormPacientePageModule' },
-  { path: 'add-edit-patient', loadChildren: './add-edit-patient/add-edit-patient.module#AddEditPatientPageModule' }
+  { path: 'add-edit-patient', loadChildren: './add-edit-patient/add-edit-patient.module#AddEditPatientPageModule' },
+  { path: 'add-edit-patient:paciente', loadChildren: './add-edit-patient/add-edit-patient.module#AddEditPatientPageModule' },
+
 ];
 @NgModule({
   imports: [

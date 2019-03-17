@@ -9,38 +9,36 @@ export class PacientesService {
   pacientes: any;
 
   constructor(private http: HttpClient) {
-    this.pacientes = [];
+    this.pacientes = [
+      {
+        name: 'Beto',
+        lastName: 'Garcia',
+        edad: '27',
+        phone: '3115011330',
+        address: 'calle falsa 123'
+      }
+    ];
   }
 
    getPacientes() {
     return this.http.get('https://randomuser.me/api/?results=15');
    }
-
-   getAllPacientes(index){
-    let pacientes = localStorage.getPaciente('todo-list-'+ index);
-    if (pacientes !== 'undefined' && pacientes !== null) {
-      this.pacientes[index] = JSON.parse(pacientes);
+   // Metodos para el CRUD del Paciente
+   getAllPacientes() {
+    if (this.pacientes !== 'undefined' && this.pacientes !== null) {
+      return(this.pacientes);
     }
-    if (index>=this.pacientes.length) this.pacientes.push([]);
-    return(this.pacientes[index]);
    }
-   
-   savePaciente(listIndex){
-    localStorage.setItem('todo-list-'+listIndex,
-     JSON.stringify(this.pacientes[listIndex]));
+   getPaciente(index: number) {
+    return this.pacientes[index];
    }
-
-   getPaciente(index){
-    return(this.pacientes[index]);
+   createPaciente(paciente: any) {
+    this.pacientes.push(paciente);
    }
-   setPaciente(paciente, index ){
-    if (index == undefined) this.pacientes.push(Object.assign({}, paciente));
-    else this.pacientes[index] = Object.assign({}, paciente);
-    this.savePaciente(index);  
+   updatePaciente(index: number, paciente: any) {
+    this.pacientes.splice(index, 1, paciente);
    }
-
-   deletePaciente(index){
-    this.pacientes.splice(index,1);
-    this.savePaciente(index);
+   deletePaciente(index: number) {
+    this.pacientes.splice(index, 1);
    }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import  {PacientesService} from '../services/pacientes.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {PacientesService} from '../services/pacientes.service';
 
 @Component({
   selector: 'app-add-edit-patient',
@@ -10,25 +11,69 @@ import  {PacientesService} from '../services/pacientes.service';
 })
 
 export class AddEditPatientPage implements OnInit {
-
   paciente: any;
-  tabIndex: number;
-  itemIndex: number;
-
+  pacienteForm: FormGroup;
+  update: boolean;
+  id: number;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     public alertController: AlertController,
-    private pacienteList:PacientesService
-  ) { }
+    private pacienteList: PacientesService,
+    private formBuilder: FormBuilder,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.tabIndex = +this.route.snapshot.paramMap.get('tab');
-    this.itemIndex = +this.route.snapshot.paramMap.get('item');
-    if (this.itemIndex >= 0) {
-      this.paciente = Object.assign({}, this.pacienteList.getPaciente(this.itemIndex));
-    }
+    this.activeRoute.params.subscribe(data => {
+      this.id = data.id;
+      this.update = data.update || false;
+      if ( this.id !== undefined) {
+      this.paciente = this.pacienteList.getPaciente(this.id);
+      }else{
+        this.paciente = {
+          name: "",
+          lastName: "",
+          edad: "",
+          phone: "",
+          address: ""
+        };
+      }
+      console.log('estoy en ng on init');
+      console.log(this.id);
+      console.log(this.update);
+      console.log(this.paciente);
+    });
+    this.pacienteForm = this.formBuilder.group({
+      name: [this.paciente.name || '', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(45),
+        //Validators.pattern('^[a-z]')
+      ]],
+      lastName: new FormControl(this.paciente.lastName || '', Validators.compose([
+        Validators.required,
+        Validators.minLength(6),
+        //Validators.pattern('^[a-z]')
+      ])),
+      edad: new FormControl(this.paciente.edad || '', Validators.compose([
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(3),
+        //Validators.pattern('^[0-9]')
+      ])),
+      phone: new FormControl(this.paciente.phone || '', Validators.compose([
+        Validators.required,
+        Validators.minLength(6),
+        //Validators.pattern('^[0-9]')
+      ])),
+      address: new FormControl(this.paciente.address || '', Validators.compose([
+        Validators.required,
+        //Validators.minLength(6),
+      ])),
+    });
+
   }
+
   async error(message) {
     const alert = await this.alertController.create({
       message: message,
@@ -37,17 +82,27 @@ export class AddEditPatientPage implements OnInit {
     await alert.present();
   }
   save() {
-    if (!this.paciente.task.length) {
-      this.error('Los campos no pueden estar vacios');
+    this.paciente = {
+      name: this.pacienteForm.value.name,
+      lastName: this.pacienteForm.value.lastName,
+      edad: this.pacienteForm.value.edad,
+      phone: this.pacienteForm.value.phone,
+      address: this.pacienteForm.value.address
+    };
+      if (this.update) {
+        this.pacienteList.updatePaciente(this.id, this.paciente);
+        console.log(this.paciente);
+        this.router.navigate(['/tabs/tab3']);
+      } else {
+        this.pacienteList.createPaciente(this.paciente);
+        console.log(this.paciente);
+        this.router.navigate(['/tabs/tab3']);
+      }
     }
-    else {
-      if (this.itemIndex >= 0) {
-        this.pacienteList.setPaciente(this.paciente, this.itemIndex);
-      }
-      else {
-        this.pacienteList.setPaciente(this.tabIndex, this.paciente);
-      }
+
+    atras() {
       this.router.navigate(['/tabs/tab3']);
     }
+
   }
-}
+

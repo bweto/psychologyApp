@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let paciente of pacientes">
+  <ion-list #listaPacientes lines="full">
+    <ion-item-sliding *ngFor="let paciente of pacientes;let i = index">
       <ion-grid>
         <ion-row align-items-center>
           <ion-col align-self-center>
@@ -19,15 +19,26 @@
           <ion-col align-self-center>
             <!-- <ion-label>{{ paciente.name.first  | uppercase }}</ion-label>
          <ion-label>{{ paciente.email }}</ion-label> -->
-            <ion-label>{{ paciente.name | uppercase }}</ion-label>
-            <ion-label>{{ paciente.phone }}</ion-label>
+            <ion-label text-wrap>
+              <ion-icon slot="icon-only" name="people"></ion-icon>
+              <h2>{{ paciente.name | uppercase }}</h2>
+              <p>{{ paciente.phone }}</p>
+              <ion-buttons>
+                  <ion-button (click)="deletePaciente(i)" color="danger">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                    <ion-button (click)="editarPaciente(i)" color="danger">
+                        <ion-icon slot="icon-only" name="create"></ion-icon>
+                      </ion-button>  
+              </ion-buttons>
+            </ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-item>
+    </ion-item-sliding>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/add-edit-patient', { tab:tabIndex, item:-1 }]">
+    <ion-fab-button (click)="agregar()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
