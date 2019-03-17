@@ -27,9 +27,8 @@
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click) = "addPatient()">
+    <ion-fab-button [routerLink]="['/add-edit-patient', { tab:tabIndex, item:-1 }]">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

@@ -12,10 +12,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageModule } from './login/login.module';
 import { PacientesService } from './services/pacientes.service';
+import { RegistrationPatientComponent } from './registration-patient/registration-patient.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrationPatientComponent
   ],
   entryComponents: [],
   imports: [

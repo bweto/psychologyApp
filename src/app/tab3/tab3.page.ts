@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { AlertController, IonList, IonTabs } from '@ionic/angular';
 import { PacientesService } from '../services/pacientes.service';
 import { Patient } from '../models/patient';
 @Component({
@@ -7,9 +8,14 @@ import { Patient } from '../models/patient';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-pacientes:Patient [] = [];
+
+  @ViewChild('ListPatient') listRef: IonList;
+  tabIndex: number;
+  reorder: boolean;
+
   constructor (
-    public pacientesService: PacientesService
+    public pacientesService: PacientesService,
+    private alertController: AlertController
 ) { }
 
   ngOnInit () {
@@ -22,18 +28,32 @@ pacientes:Patient [] = [];
        console.error(error);
       }
     ); */
-    this.pacientesService.getLocalPatient()
-    .subscribe(
-      (data) => {
-        this.pacientes = data['results'];
-      },
-      (error) => {
-       console.error(error);
-      }
-    );
     }
 
-    addPatient(){
-
+    toggleReorder() {
+      this.reorder = !this.reorder;
+    }
+    setTab(tabIndex) {
+      this.tabIndex = tabIndex;
+    }
+    async deleteItem(item?) {
+      const alert = await this.alertController.create({
+        header: item === undefined ? 'Delete all' : 'Borrar paciente',
+        message: '¿Lo vas a borrar?',
+        buttons: [
+          {
+            text: 'Borrado',
+            handler: () => {
+              this.listRef.closeSlidingItems();
+                this.pacientesService.deletePaciente(this.tabIndex);              
+            }
+          },
+          {
+            text: 'CANCELAR',
+            role: 'cancelar'
+          }
+        ]
+      });
+      await alert.present();
     }
 }
