@@ -29,7 +29,7 @@ export class AddEditPatientPage implements OnInit {
       this.update = data.update || false;
       if ( this.id !== undefined) {
       this.paciente = this.pacienteList.getPaciente(this.id);
-      }else{
+      } else {
         this.paciente = {
           name: "",
           lastName: "",
@@ -38,48 +38,36 @@ export class AddEditPatientPage implements OnInit {
           address: ""
         };
       }
-      console.log('estoy en ng on init');
-      console.log(this.id);
-      console.log(this.update);
-      console.log(this.paciente);
     });
     this.pacienteForm = this.formBuilder.group({
       name: [this.paciente.name || '', [
         Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(45),
-        //Validators.pattern('^[a-z]')
+        Validators.maxLength(25),
+        Validators.pattern('^[a-zA-Z]+$')
       ]],
       lastName: new FormControl(this.paciente.lastName || '', Validators.compose([
         Validators.required,
-        Validators.minLength(6),
-        //Validators.pattern('^[a-z]')
+        Validators.maxLength(25),
+        Validators.pattern('^[a-zA-Z]+$')
       ])),
       edad: new FormControl(this.paciente.edad || '', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(3),
-        //Validators.pattern('^[0-9]')
+        Validators.pattern('^[0-9]+$')
       ])),
       phone: new FormControl(this.paciente.phone || '', Validators.compose([
         Validators.required,
-        Validators.minLength(6),
-        //Validators.pattern('^[0-9]')
+        Validators.minLength(7),
+        Validators.maxLength(10),
+        Validators.pattern('^[0-9]+$')
       ])),
       address: new FormControl(this.paciente.address || '', Validators.compose([
         Validators.required,
-        //Validators.minLength(6),
+        Validators.maxLength(35),
       ])),
     });
 
-  }
-
-  async error(message) {
-    const alert = await this.alertController.create({
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
   }
   save() {
     this.paciente = {
@@ -99,7 +87,6 @@ export class AddEditPatientPage implements OnInit {
         this.router.navigate(['/tabs/tab3']);
       }
     }
-
     atras() {
       this.router.navigate(['/tabs/tab3']);
     }

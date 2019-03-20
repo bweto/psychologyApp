@@ -61,4 +61,7 @@ export class Tab3Page {
       const datos = { id, update };
       this.router.navigate(['/add-edit-patient', datos]);
     }
+    showPaciente(index?: number) {
+     
+    }
 }

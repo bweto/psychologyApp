@@ -1,11 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Paciente</ion-title>
+    
+    <ion-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col align-self-center>
+              <ion-icon name="contact" ></ion-icon>
+          </ion-col>
+          <ion-col>
+              <h6>Paciente</h6> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+        </ion-title>
     <ion-buttons slot="primary">
         <ion-button color="danger" (click)="atras()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
-        <ion-button color="primary" (click)="save()">
+        <ion-button color="primary" (click)="save()" [disabled]="!pacienteForm.valid">
           <ion-icon slot="icon-only" name="checkmark"></ion-icon>
         </ion-button>
     </ion-buttons>
