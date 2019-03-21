@@ -14,13 +14,8 @@
     </ion-card-header>
   
     <ion-item>
-      <ion-label position="floating">Fecha y hora (D/M/A)</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label position="floating">Nombre del paciente</ion-label>
-      <ion-input></ion-input>
+      <ion-label position="floating">Fecha y hora (DD/MM/AAAA)</ion-label>
+      <ion-input formControlName="DATE"></ion-input>
     </ion-item>
     
       <ion-card-title>
@@ -28,20 +23,20 @@
       </ion-card-title>
       <ion-item>
         <ion-label position="floating">Nombre del estudiante</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="NAME"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Edad</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="AGE"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Sexo</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="SEX"></ion-input>
       </ion-item>
     
       <ion-item>
         <ion-label position="floating">Curso</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="GRADE"></ion-input>
       </ion-item>
       <ion-card-title>
         Datos familiares
@@ -49,36 +44,36 @@
 
       <ion-item>
         <ion-label position="floating">Nombre de la mamá</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="MOTHER"></ion-input>
       </ion-item>
 
        <ion-item>
         <ion-label position="floating">Número telefónico</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="PHONE"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Dirección de residencia</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="ADDRESS"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Nombre del Papá</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="FATHER"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Número telefónico</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="PHONE"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Dirección de residencia</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="ADDRESS"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nombre del acudiente</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="ACUDIENTE"></ion-input>
       </ion-item>
       <ion-card-title>
         Datos del caso
@@ -86,26 +81,26 @@
 
       <ion-item>
         <ion-label position="floating">Caso número</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="NCASO"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Motivo de la cita</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="MOTIVO"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Caso</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="CASO"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Remitir a:</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="REMITIR"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Anexos</ion-label>
-        <ion-input></ion-input>
+        <ion-input  formControlName="ANEXOS"></ion-input>
       </ion-item>
       <ion-button>Guardar formulario<ion-icon slot="start" name="save"></ion-icon>
       </ion-button>
