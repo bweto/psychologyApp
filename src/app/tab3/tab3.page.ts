@@ -32,6 +32,7 @@ export class Tab3Page {
     this.index = this.pacientes.length;
     }
     async deletePaciente(index?: number) {
+      console.log(index);
       const alert = await this.alertController.create({
         header: index === undefined ? 'Borrar paciente' : 'Borrar paciente',
         message: '¿Lo vas a borrar?',
@@ -39,7 +40,6 @@ export class Tab3Page {
           {
             text: 'Borrar',
             handler: () => {
-              this.listRef.closeSlidingItems();
                 this.pacientesService.deletePaciente(index);
 
             }
@@ -61,7 +61,9 @@ export class Tab3Page {
       const datos = { id, update };
       this.router.navigate(['/add-edit-patient', datos]);
     }
-    showPaciente(index?: number) {
-     
+    showCita(idPaciente?: number) {
+      const idPacie = idPaciente;
+      const datos = { idPacie};
+      this.router.navigate(['/show-cita', datos]);
     }
 }

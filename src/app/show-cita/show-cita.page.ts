@@ -23,11 +23,11 @@ export class ShowCitaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activedRoute.params.subscribe(data => {
-      this.idCita = data.idCita;
-      this.idPaciente = data.idPaciente || '';
-      this.citas = this.citaService.getAllCitas(this.idPaciente);
-      this.index = this.citas.length;
+    this.activedRoute.params.subscribe(datos => {
+      this.idCita = datos.idCita || 0;
+      this.idPaciente = datos.idPacie || '';
+      this.citas = this.citaService.getAllCitas(this.idPaciente) || {};
+      this.index = this.citas.length || 0;
     });
   }
   async deleteCita(index?: number) {
@@ -38,7 +38,7 @@ export class ShowCitaPage implements OnInit {
         {
           text: 'Borrar',
           handler: () => {
-            this.listRef.closeSlidingItems();
+            //this.listRef.closeSlidingItems();
               this.citaService.deleteCita(index);
 
           }
@@ -52,14 +52,15 @@ export class ShowCitaPage implements OnInit {
     await alert.present();
   }
   agregar() {
-    this.router.navigate(['/add-edit-patient', {}]);
+    this.router.navigate(['/cita', {}]);
   }
   editarCita(index?: number) {
     const update = true;
     const id = index;
     const datos = { id, update };
-    this.router.navigate(['/add-edit-patient', datos]);
+    this.router.navigate(['/cita', datos]);
   }
-  showCita(index?: number) {
+  showCita(idCita: number) {
+
   }
 }
