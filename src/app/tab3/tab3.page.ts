@@ -15,7 +15,8 @@ export class Tab3Page {
   constructor (
     public pacientesService: PacientesService,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private activedRoute: ActivatedRoute
 ) { }
 
   ngOnInit() {
@@ -61,9 +62,11 @@ export class Tab3Page {
       const datos = { id, update };
       this.router.navigate(['/add-edit-patient', datos]);
     }
-    showCita(idPaciente?: number) {
-      const idPacie = idPaciente;
-      const datos = { idPacie};
-      this.router.navigate(['/show-cita', datos]);
+    showCita(index?: number) {
+      const idPacie = index;
+      const data = {
+        idPaciente: idPacie
+      }
+      this.router.navigate(['/show-cita', data]);
     }
 }

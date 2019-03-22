@@ -24,10 +24,14 @@ export class ShowCitaPage implements OnInit {
 
   ngOnInit() {
     this.activedRoute.params.subscribe(datos => {
-      this.idCita = datos.idCita || 0;
-      this.idPaciente = datos.idPacie || '';
+      //this.idCita = datos.idCita || 0;
+      //this.idPaciente = datos.idPacie || '';
+      console.log(datos);
+      if (datos.idPaciente !== null && datos.idPaciente !== 'undefined') {
+      this.idPaciente = datos.idPaciente || '';
       this.citas = this.citaService.getAllCitas(this.idPaciente) || {};
       this.index = this.citas.length || 0;
+      }
     });
   }
   async deleteCita(index?: number) {

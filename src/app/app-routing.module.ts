@@ -9,8 +9,10 @@ const routes: Routes = [
   { path: 'form-paciente', loadChildren: './form-paciente/form-paciente.module#FormPacientePageModule' },
   { path: 'add-edit-patient', loadChildren: './add-edit-patient/add-edit-patient.module#AddEditPatientPageModule' },
   { path: 'add-edit-patient:paciente', loadChildren: './add-edit-patient/add-edit-patient.module#AddEditPatientPageModule' },
+  { path: 'cita', loadChildren: './cita/cita.module#CitaPageModule' },
   { path: 'cita:data', loadChildren: './cita/cita.module#CitaPageModule' },
-  { path: 'show-cita:data', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
+  { path: 'show-cita', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
+  { path: 'show-cita:data', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' }
 
 ];
 @NgModule({

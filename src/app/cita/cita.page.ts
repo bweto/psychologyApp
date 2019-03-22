@@ -72,8 +72,7 @@ save() {
     fecha: this.citaForm.value.fecha,
     titulo: this.citaForm.value.titulo,
     resultado: this.citaForm.value.resultado,
-    idCita: this.citaForm.value.idCita,
-    idPaciente: this.citaForm.value.idCita
+    idPaciente: this.idPaciente
   };
     if (this.update) {
       this.citaService.updateCita(this.id, this.cita);
