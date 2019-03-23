@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title><ion-button color="danger" (click)="salir()">
-        <ion-icon name="arrow-round-back"></ion-icon>
-    </ion-button>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-title><ion-button color="danger" (click)="salir()">
+          <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content padding>
 
@@ -12,100 +12,190 @@
     <ion-card-header>
       <ion-card-title>NUEVA CITA DE PSICOLOGIA </ion-card-title>
     </ion-card-header>
-  
+
+    <ion-card-content>
     <ion-item>
-      <ion-label position="floating">Fecha y hora (DD/MM/AAAA)</ion-label>
-      <ion-input formControlName="DATE"></ion-input>
-    </ion-item>
-    
+        <ion-label color="primary" floating>Fecha y hora</ion-label>
+        <ion-datetime display-format="MMM DD, YYYY HH:mm"
+                      formControlName="fecha"
+        ></ion-datetime>
+      </ion-item>
+
       <ion-card-title>
-        Datos del estudiante
-      </ion-card-title>
-      <ion-item>
-        <ion-label position="floating">Nombre del estudiante</ion-label>
-        <ion-input formControlName="NAME"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Edad</ion-label>
-        <ion-input formControlName="AGE"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Sexo</ion-label>
-        <ion-input formControlName="SEX"></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="floating">Curso</ion-label>
-        <ion-input formControlName="GRADE"></ion-input>
-      </ion-item>
-      <ion-card-title>
-        Datos familiares
-      </ion-card-title>
+          Datos del estudiante
+        </ion-card-title>
 
-      <ion-item>
-        <ion-label position="floating">Nombre de la mamá</ion-label>
-        <ion-input formControlName="MOTHER"></ion-input>
-      </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Nombre del estudiante</ion-label>
+            <ion-input formControlName="NombreEstudiante"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+            <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+          </ion-item>
+        </ion-list>
 
-       <ion-item>
-        <ion-label position="floating">Número telefónico</ion-label>
-        <ion-input formControlName="PHONE"></ion-input>
-      </ion-item>
+        <ion-list>
+            <ion-item>
+              <ion-label color="primary" floating>Edad</ion-label>
+              <ion-input formControlName="Edad"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+              <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+            </ion-item>
+          </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Dirección de residencia</ion-label>
-        <ion-input formControlName="ADDRESS"></ion-input>
-      </ion-item>
+          <ion-list>
+              <ion-item>
+                <ion-label color="primary" floating>Sexo</ion-label>
+                <ion-input formControlName="Sexo"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+              </ion-item>
+            </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Nombre del Papá</ion-label>
-        <ion-input formControlName="FATHER"></ion-input>
-      </ion-item>
+            <ion-list>
+                <ion-item>
+                  <ion-label color="primary" floating>Curso</ion-label>
+                  <ion-input formControlName="Curso"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                  <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                </ion-item>
+              </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Número telefónico</ion-label>
-        <ion-input  formControlName="PHONE"></ion-input>
-      </ion-item>
+              <ion-card-title>
+                  Datos familiares
+                </ion-card-title>
 
-      <ion-item>
-        <ion-label position="floating">Dirección de residencia</ion-label>
-        <ion-input  formControlName="ADDRESS"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Nombre del acudiente</ion-label>
-        <ion-input  formControlName="ACUDIENTE"></ion-input>
-      </ion-item>
-      <ion-card-title>
-        Datos del caso
-      </ion-card-title>
+              <ion-list>
+                  <ion-item>
+                    <ion-label color="primary" floating>Nombre de la mamá</ion-label>
+                    <ion-input formControlName="NombreMamá"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                    <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                  </ion-item>
+                </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Caso número</ion-label>
-        <ion-input formControlName="NCASO"></ion-input>
-      </ion-item>
+                <ion-list>
+                    <ion-item>
+                      <ion-label color="primary" floating>Número telefónico</ion-label>
+                      <ion-input formControlName="NúmeroTelefónico"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                      <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                    </ion-item>
+                  </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Motivo de la cita</ion-label>
-        <ion-input  formControlName="MOTIVO"></ion-input>
-      </ion-item>
+                  <ion-list>
+                      <ion-item>
+                        <ion-label color="primary" floating>Dirección de residencia</ion-label>
+                        <ion-input formControlName="DirecciónResidencia"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                        <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                      </ion-item>
+                    </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Caso</ion-label>
-        <ion-input  formControlName="CASO"></ion-input>
-      </ion-item>
+                    <ion-list>
+                        <ion-item>
+                          <ion-label color="primary" floating>Nombre del Papá</ion-label>
+                          <ion-input formControlName="NombrePapá"></ion-input>
+                        </ion-item>
+                        <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                          <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                        </ion-item>
+                      </ion-list>
 
-      <ion-item>
-        <ion-label position="floating">Remitir a:</ion-label>
-        <ion-input  formControlName="REMITIR"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Anexos</ion-label>
-        <ion-input  formControlName="ANEXOS"></ion-input>
-      </ion-item>
-      <ion-button>Guardar formulario<ion-icon slot="start" name="save"></ion-icon>
-      </ion-button>
-     
-  </ion-card>
-</ion-content>
-    
-        
+                      <ion-list>
+                          <ion-item>
+                            <ion-label color="primary" floating>Número telefónico</ion-label>
+                            <ion-input formControlName="NúmeroTelefónicoP"></ion-input>
+                          </ion-item>
+                          <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                            <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                          </ion-item>
+                        </ion-list>
+
+                        <ion-list>
+                            <ion-item>
+                              <ion-label color="primary" floating>Dirección de residencia</ion-label>
+                              <ion-input formControlName="DirecciónResidenciaP"></ion-input>
+                            </ion-item>
+                            <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                              <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                            </ion-item>
+                          </ion-list>
+
+                          <ion-list>
+                              <ion-item>
+                                <ion-label color="primary" floating>Nombre del acudiente</ion-label>
+                                <ion-input formControlName="NombreAcudiente"></ion-input>
+                              </ion-item>
+                              <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                              </ion-item>
+                            </ion-list>
+
+                            <ion-card-title>
+                                Datos del caso
+                              </ion-card-title>
+
+                            <ion-list>
+                                <ion-item>
+                                  <ion-label color="primary" floating>Caso número</ion-label>
+                                  <ion-input formControlName="CasoNúmero"></ion-input>
+                                </ion-item>
+                                <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                  <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                                </ion-item>
+                              </ion-list>
+
+                              <ion-list>
+                                  <ion-item>
+                                    <ion-label color="primary" floating>Motivo de la cita</ion-label>
+                                    <ion-input formControlName="MotivoCita"></ion-input>
+                                  </ion-item>
+                                  <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                    <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                                  </ion-item>
+                                </ion-list>
+
+                                <ion-list>
+                                    <ion-item>
+                                      <ion-label color="primary" floating>Caso</ion-label>
+                                      <ion-input formControlName="Caso"></ion-input>
+                                    </ion-item>
+                                    <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                      <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                                    </ion-item>
+                                  </ion-list>
+
+                                  <ion-list>
+                                      <ion-item>
+                                        <ion-label color="primary" floating>Remitir a:</ion-label>
+                                        <ion-input formControlName="Remitir"></ion-input>
+                                      </ion-item>
+                                      <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                        <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                                      </ion-item>
+                                    </ion-list>
+
+                                    <ion-list>
+                                        <ion-item>
+                                          <ion-label color="primary" floating>Anexos</ion-label>
+                                          <ion-input formControlName="Anexos"></ion-input>
+                                        </ion-item>
+                                        <ion-item *ngIf="form.get('Id').errors && form.get('Id').touched">
+                                          <p *ngIf= "form.get('Id').hasError('required')">Es obligatori</p>
+                                        </ion-item>
+                                      </ion-list>
+
+        </ion-card-content>
+
+        <ion-button>Guardar formulario<ion-icon slot="start" name="save"></ion-icon></ion-button>
+
+      </ion-card>
+    </ion-content>
