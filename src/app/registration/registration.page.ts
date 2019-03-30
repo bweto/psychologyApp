@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {PacientesFormulario} from '../services/paciente.formulario'
+import {PacientesFormulario} from '../services/paciente.formulario';
 
  @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
 })
+
 export class RegistrationPage {
   from: FormGroup;
 
@@ -38,9 +39,7 @@ export class RegistrationPage {
       Caso:['',Validators.required],
       Remitir:['',Validators.required],
       Anexos:['',Validators.required],
-
-      
-    })
+    });
   }
   guardarPaciente(){
     this.services.getPaciente(this.from.value)
@@ -48,7 +47,7 @@ export class RegistrationPage {
       rs => this.showAlert(),
       er => console.log(er),
       () => console.log('ok')
-    )
+    );
   }
   showAlert(){
     let alert = this.alertContrl.create({

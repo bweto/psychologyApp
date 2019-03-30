@@ -1,62 +1,80 @@
-<ion-content 
-  padding 
-  class="background container"
-  >
-  <ion-grid class="login">
-    <ion-row  class="item">  
-        <ion-col >
-          <ion-card color="primary">
-              <ion-card-header>
-                <ion-card-title>
-                  Iniciar sesión
-                </ion-card-title>
-              </ion-card-header>
-              <ion-card-content color="primary">
-                  <form [formGroup]="loginForm">
-                <ion-item color="primary" >
-                  <ion-label position="floating">
-                  Usuario
-                </ion-label>
-                  <ion-input  type="text" 
-                            formControlName="email">
-                  </ion-input>
-                </ion-item>
-                <div class="error-messages">
-                  <ng-container *ngFor = "let error of error_messages.email">
-                    <div class="error-messages" *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-                     {{error.message}}
-                    </div>
-                  </ng-container>
-                </div>
-                <ion-item color="primary">
-                  <ion-label position="floating">
-                    Contraseña
-                  </ion-label>
-                  <ion-input  type="password" 
-                             formControlName=password>
-                  </ion-input>
-                </ion-item>
-                <div class="error-messages">
-                    <ng-container *ngFor = "let error of error_messages.password">
-                      <div class="error-messages" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                       {{error.message}}
-                      </div>
-                    </ng-container>
-                  </div>
-                <ion-button 
-                  [disabled]="!loginForm.valid"
-                  shape="round"
-                  expand="block"
-                  color="danger"
-                  (click)="login()"
-                >
-                  Iniciar
-                </ion-button>
-              </form>
-              </ion-card-content>
-            </ion-card>
-          </ion-col> 
+<ion-content color="Light" slots="fixed" padding>
+  <ion-grid class="max-height box">
+    <ion-row>
+      <ion-col>
+        <div class="box">
+          <ion-avatar>
+            <img src="/assets/brain.jpg" />
+          </ion-avatar>
+        </div>
+        <div class="pt box">
+            <p>Login</p>
+        </div>
+        
+        <form [formGroup]="loginForm">
+          <ion-item >
+            <ion-label position="floating">
+              Usuario
+            </ion-label>
+            <ion-input type="text" formControlName="email"> </ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+              <div
+                class="error-messages"
+                *ngIf="
+                  loginForm.get('email').hasError(error.type) &&
+                  (loginForm.get('email').dirty ||
+                    loginForm.get('email').touched)
+                "
+              >
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+          <ion-item >
+            <ion-label position="floating">
+              Contraseña
+            </ion-label>
+            <ion-input type="password" formControlName="password"> </ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.password">
+              <div
+                class="error-messages"
+                *ngIf="
+                  loginForm.get('password').hasError(error.type) &&
+                  (loginForm.get('password').dirty ||
+                    loginForm.get('password').touched)
+                "
+              >
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="box">
+          <ion-button
+            [disabled]="!loginForm.valid"
+            shape="round"
+            color="danger"
+            (click)="login()"
+            strong="true"
+            class="pt"
+            expand="full"
+          >
+            <p>Iniciar</p>
+          </ion-button>
+        </div>
+        </form>
+        <ion-button shape="round" 
+                    color="primary"
+                    expand="full">
+          <ion-buttons slot="start">
+            <ion-icon name="logo-google"></ion-icon>
+            Login con Google
+          </ion-buttons>
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
-  
 </ion-content>

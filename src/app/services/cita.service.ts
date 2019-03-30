@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class CitaService {
   citas: any;
-  constructor() {}
+  constructor() {
+    this.citas = [];
+  }
   getAllCitas(idPaciente: number) {
     if (this.citas !== 'undefined' && this.citas !== null){
       return this.citas.map((cita) => {
@@ -13,10 +15,10 @@ export class CitaService {
       });
     }
   }
-  getCita(idCita: number, idPaciente: number) {
-    return this.citas.map( (cita) => {
-      cita[idCita] = idCita && cita[idPaciente].idPaciente;
-    });
+  getCita(idPaciente: number) {
+    return (this.citas !== null || this.citas !== undefined) ? this.citas.map( (cita) => {
+      cita[idPaciente].idPaciente;
+    }) : null;
   }
   updateCita(idCita: number, cita: any) {
     return this.citas.splice(idCita, 1, cita);

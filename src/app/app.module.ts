@@ -26,7 +26,7 @@ import { RegistrationPatientComponent } from './registration-patient/registratio
     AppRoutingModule,
     LoginPageModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

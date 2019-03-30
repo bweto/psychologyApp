@@ -1,25 +1,23 @@
+.max-height{
+  height: 100%;
+}
 .background{
-  --background: linear-gradient(to bottom, #1d4350, #a43931);
-};
+  --background: hsla(11, 80%, 60%, .3);
+}
 .error-messages{
   font-size: 0.9em;
   color: red;
   text-align: center;
 }
-.container{
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto;
-
-}
-.login{
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  justify-items: center;
+.box{
+  display:flex;
+  flex-flow: row wrap;
   align-items: center;
+  justify-content: center;
 }
-.item{
-  justify-self: center;
+.pt{
+  padding-top: 10px;
+}
+.color-input{
+  background-color:  hsla(11, 80%, 60%, .3);
 }

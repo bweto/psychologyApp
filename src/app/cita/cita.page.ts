@@ -23,11 +23,10 @@ export class CitaPage implements OnInit {
   ) { }
   ngOnInit() {
     this.activeRoute.params.subscribe(data => {
-      this.id = data.id;
-      this.update = data.update || false;
-      if ( this.id !== undefined) {
-      this.cita = this.citaService.getCita(this.id, this.idPaciente);
-      } else {
+      this.idPaciente = data.idPaciente;
+     this.update = data.update || false;
+     this.cita = this.citaService.getCita(this.idPaciente);
+      if (this.cita == undefined || this.cita == null) {
         this.cita = {
           fecha: "",
           titulo: "",
@@ -37,29 +36,30 @@ export class CitaPage implements OnInit {
         };
       }
     });
+    console.log('si');
     this.citaForm = this.formBuilder.group({
       fecha: [this.cita.fecha || '', [
-        Validators.required,
+        //Validators.required,
         //Validators.maxLength(25),
         //Validators.pattern('^[a-zA-Z]+$')
       ]],
       titulo: new FormControl(this.cita.titulo || '', Validators.compose([
-        Validators.required,
+        //Validators.required,
         //Validators.maxLength(25),
         //Validators.pattern('^[a-zA-Z]+$')
       ])),
       resultado: new FormControl(this.cita.resultado || '', Validators.compose([
-        Validators.required,
+        //Validators.required,
         //Validators.minLength(1),
         //Validators.maxLength(3),
         //Validators.pattern('^[0-9]+$')
       ])),
-      idCita: new FormControl(this.cita.idCita || '', Validators.compose([
-        Validators.required,
+     /* idCita: new FormControl(this.cita.idCita || '', Validators.compose([
+        //Validators.required,
       ])),
       idPaciente: new FormControl(this.cita.Idpaciente || '', Validators.compose([
-        Validators.required,
-      ]))
+        //Validators.required,
+      ]))*/
 
     });
   }
@@ -74,12 +74,14 @@ save() {
     resultado: this.citaForm.value.resultado,
     idPaciente: this.idPaciente
   };
+
+  console.log(this.cita);
     if (this.update) {
       this.citaService.updateCita(this.id, this.cita);
-      this.router.navigate(['/tabs/tab3']);
+      this.router.navigate(['/show-cita']);
     } else {
       this.citaService.createCita(this.cita);
-      this.router.navigate(['/tabs/tab3']);
+      this.router.navigate(['/show-cita']);
     }
 }
 }

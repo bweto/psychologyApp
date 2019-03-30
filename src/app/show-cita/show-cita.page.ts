@@ -55,8 +55,12 @@ export class ShowCitaPage implements OnInit {
     });
     await alert.present();
   }
-  agregar() {
-    this.router.navigate(['/cita', {}]);
+  agregar(index?: number) {
+    const data = {
+      idPaciente: this.idPaciente,
+      idCitasIndex: index
+    };
+    this.router.navigate(['/cita', {data}]);
   }
   editarCita(index?: number) {
     const update = true;
