@@ -14,6 +14,11 @@ import { LoginPageModule } from './login/login.module';
 import { PacientesService } from './services/pacientes.service';
 import { RegistrationPatientComponent } from './registration-patient/registration-patient.component';
 
+//firebase
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +32,9 @@ import { RegistrationPatientComponent } from './registration-patient/registratio
     LoginPageModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
   providers: [
     StatusBar,

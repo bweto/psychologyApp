@@ -6,6 +6,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import {
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-
+  user: any;
   error_messages = {
     'email': [
     {type: 'required', message: 'Digita un Email.'},
@@ -33,7 +34,8 @@ export class LoginPage implements OnInit {
   };
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -53,9 +55,21 @@ export class LoginPage implements OnInit {
   }
 
    login() {
-    console.log(`email: ${this.loginForm.value.email}`);
-    console.log(`password: ${this.loginForm.value.password}`);
-    this.router.navigate(['../tabs/tab1']);
+     this.user = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+     };
+
+    this.authService.handlerRegister(this.user)
+     .then(() => {
+      this.router.navigate(['../tabs/tab1']);
+     })
+     .catch(() => {
+      this.authService.handlerLogin(this.user)
+       .then( () => {
+        this.router.navigate(['../tabs/tab1']);
+       });
+     });
   }
 
 }
