@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
+    "@ionic-native/calendar": "^5.3.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/firebase": "^5.3.0",
     "@ionic-native/firebase-authentication": "^5.3.0",
@@ -31,6 +32,7 @@
     "cordova-browser": "5.0.4",
     "cordova-lib": "^9.0.0",
     "cordova-plugin-buildinfo": "2.0.2",
+    "cordova-plugin-calendar": "5.1.4",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-firebase": "2.0.5",
     "cordova-plugin-firebase-authentication": "1.1.2",
@@ -87,7 +89,8 @@
       "cordova-plugin-firebase-authentication": {
         "FIREBASE_AUTH_VERSION": "16.1.+"
       },
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-firebase": {},
+      "cordova-plugin-calendar": {}
     },
     "platforms": [
       "android",

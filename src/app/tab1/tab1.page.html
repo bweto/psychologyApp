@@ -1,61 +1,34 @@
 <ion-header>
   <ion-toolbar color="danger">
     <ion-title >
-      <ion-grid>
-        <ion-row class="justify-content-around">
-          <ion-col>
+     <ion-buttons>
               <ion-icon name="clipboard"></ion-icon>
-              Reportes de Psicología 
-          </ion-col>
-          <ion-col>
-            <ion-buttons>
+              Calendario de citas 
               <ion-button color="primary" (click)="salir()">
                   <ion-icon name="exit"></ion-icon>
               </ion-button>
-            </ion-buttons>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+            </ion-buttons>    
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/Waldo.jpg" width="100" hight="50" class="center"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Reportes</ion-card-subtitle>
-        <ion-card-title>
-            <ion-icon name="paper"></ion-icon>
-          Características
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p text-justify>Esta herramienta te permite utilizar formularios para hacer el seguimiento de tus pacientes,
-           registrarlos y registrar las consultas. Tambien cuenta con reportes especiales para Bienestar Familiar,
-           Fiscalía, Policía de Infancia y Adolescencia y remisiones a psiquiatría.
-        </p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Reportes</ion-label>
-      </ion-list-header>
-      <ion-item href="https://www.icbf.gov.co/">
-        <ion-icon slot="start" color="warning " name="bookmark"></ion-icon>
-        <ion-label>Bienestar Familiar</ion-label>
-      </ion-item>
-      <ion-item href="https://www.fiscalia.gov.co/colombia/">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Fiscalía</ion-label>
-      </ion-item>
-      <ion-item href="https://www.policia.gov.co/proteccion-infancia">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Policía de Infancia y <br> Adolescencia</ion-label>
-      </ion-item>
-      <ion-item href="#">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Psiquiatría</ion-label>
+    <ion-list>
+      <ion-item *ngFor=" let cal of calendars" tappable>
+        <ion-button 
+        icon-only
+        (click) = "addEvent(cal)"
+        >
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+        {{cal.name}}
+        <p>{{cal.type}}</p>
+        <ion-button 
+        icon-only
+        (click) = "openCal(cal)"
+        >
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
 </ion-content>
