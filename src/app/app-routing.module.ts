@@ -13,8 +13,7 @@ const routes: Routes = [
   { path: 'cita:data', loadChildren: './cita/cita.module#CitaPageModule' },
   { path: 'show-cita', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
   { path: 'show-cita:data', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
-  { path: 'calendar-details', loadChildren: './calendar-details/calendar-details.module#CalendarDetailsPageModule' }
-
+  
 ];
 @NgModule({
   imports: [

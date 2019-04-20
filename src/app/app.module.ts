@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { LoginPageModule } from './login/login.module';
 import { PacientesService } from './services/pacientes.service';
 import { RegistrationPatientComponent } from './registration-patient/registration-patient.component';
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -39,9 +38,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
   providers: [
     StatusBar,
     SplashScreen,
-    PacientesService,
-    Calendar,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    PacientesService
   ],
   bootstrap: [AppComponent]
 })
