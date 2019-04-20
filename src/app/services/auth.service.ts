@@ -28,6 +28,7 @@ export class AuthService {
       });
     });
   }
+  
   handlerLogin(value: any) {
     return new Promise<any> ((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)

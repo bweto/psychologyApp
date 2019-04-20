@@ -1,61 +1,92 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar color="danger">
-    <ion-title >
-      <ion-grid>
-        <ion-row class="justify-content-around">
-          <ion-col>
-              <ion-icon name="clipboard"></ion-icon>
-              Reportes de Psicología 
-          </ion-col>
-          <ion-col>
-            <ion-buttons>
-              <ion-button color="primary" (click)="salir()">
-                  <ion-icon name="exit"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-title>
+    <ion-title>Psicología</ion-title>
   </ion-toolbar>
+  <h3>{{viewTitle}}</h3>
 </ion-header>
-
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/Waldo.jpg" width="100" hight="50" class="center"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Reportes</ion-card-subtitle>
-        <ion-card-title>
-            <ion-icon name="paper"></ion-icon>
-          Características
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p text-justify>Esta herramienta te permite utilizar formularios para hacer el seguimiento de tus pacientes,
-           registrarlos y registrar las consultas. Tambien cuenta con reportes especiales para Bienestar Familiar,
-           Fiscalía, Policía de Infancia y Adolescencia y remisiones a psiquiatría.
-        </p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Reportes</ion-label>
-      </ion-list-header>
-      <ion-item href="https://www.icbf.gov.co/">
-        <ion-icon slot="start" color="warning " name="bookmark"></ion-icon>
-        <ion-label>Bienestar Familiar</ion-label>
+  <ion-card mode="ios">
+    <ion-card-header (click)="collapseCard = !collapseCard">
+      <ion-card-title>Cita Nueva</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="!collapseCard">
+      <ion-item>
+        <ion-input type="text" 
+                   placeholder="Título" 
+                   [(ngModel)]="event.title">
+        </ion-input>
       </ion-item>
-      <ion-item href="https://www.fiscalia.gov.co/colombia/">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Fiscalía</ion-label>
+      <ion-item>
+          <ion-input type="text" 
+                     placeholder="Descripción"
+                     [(ngModel)]="event.desc">
+          </ion-input>
       </ion-item>
-      <ion-item href="https://www.policia.gov.co/proteccion-infancia">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Policía de Infancia y <br> Adolescencia</ion-label>
+      <ion-item>
+          <ion-label>Inició</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
+                        pickerFormat="MMM D:HH:mm" 
+                        [(ngModel)]="event.startTime" 
+                        [min]="minDate" >
+          </ion-datetime>
       </ion-item>
-      <ion-item href="#">
-        <ion-icon slot="start" color="warning" name="bookmark"></ion-icon>
-        <ion-label>Psiquiatría</ion-label>
+      <ion-item>
+          <ion-label>Fin</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
+                        pickerFormat="MMM D:HH:mm" 
+                        [(ngModel)]="event.endTime" 
+                        [min]="minDate" >
+          </ion-datetime>
       </ion-item>
-    </ion-list>
+      <ion-item>
+          <ion-label>Todo el día</ion-label>
+          <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
+      </ion-item>
+      <ion-button  fill="outline"
+                   expand="block"
+                   [disabled]="event.title == ''"
+                  (click)="addCita()">
+        Crear Cita
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row>
+    <ion-col size="4">
+      <ion-button expand="block"
+                  [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" 
+                  (click)="changeMode('month')">
+        Mes
+      </ion-button>
+    </ion-col>
+    <ion-col size="4">
+        <ion-button expand="block"
+                    [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" 
+                    (click)="changeMode('week')">
+        Semana
+        </ion-button>
+    </ion-col>
+    <ion-col size="4">
+        <ion-button expand="block"
+                    [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" 
+                    (click)="changeMode('day')">
+        Día
+        </ion-button>
+    </ion-col>
+  </ion-row>
+
+
+  <calendar [eventSource]="eventSource"
+          [calendarMode]="calendar.mode"
+          [currentDate]="calendar.currentDate"
+          (onCurrentDateChanged)="onCurrentDateChanged($event)"
+          (onEventSelected)="onEventSelected($event)"
+          (onTitleChanged)="onViewTitleChanged($event)"
+          (onTimeSelected)="onTimeSelected($event)"
+          startHour="7"
+          enHour="20"
+          step="30"
+          startingDayWeek="1"
+          >
+  </calendar>
 </ion-content>
