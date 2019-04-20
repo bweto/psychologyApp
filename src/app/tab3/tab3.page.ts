@@ -3,6 +3,8 @@ import { AlertController, IonList} from '@ionic/angular';
 import { PacientesService } from '../services/pacientes.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Patient } from '../models/patient';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -10,29 +12,22 @@ import { Patient } from '../models/patient';
 })
 export class Tab3Page {
   @ViewChild('listaPacientes') listRef: IonList;
-  pacientes: any [];
+  pacientes: Observable<any[]>;
   index: number;
+  id: string;
   constructor (
     public pacientesService: PacientesService,
     private alertController: AlertController,
     private router: Router,
-    private activedRoute: ActivatedRoute
+    private activedRoute: ActivatedRoute,
 ) { }
 
   ngOnInit() {
-    /* this.pacientesService.getPacientes()
-    .subscribe(
-      (data) => {
-        this.pacientes = data['results'];
-      },
-      (error) => {
-       console.error(error);
-      }
-    ); */
-    this.pacientes = this.pacientesService.getAllPacientes();
-    this.index = this.pacientes.length;
+    /* this.pacientes = this.pacientesService.getAllPacientes();
+    this.index = this.pacientes.length; */
+    //this.pacientes = this.pacientesService.getAllPacientes()
     }
-    async deletePaciente(index?: number) {
+   /*  async deletePaciente(index?: number) {
       console.log(index);
       const alert = await this.alertController.create({
         header: index === undefined ? 'Borrar paciente' : 'Borrar paciente',
@@ -52,21 +47,21 @@ export class Tab3Page {
         ]
       });
       await alert.present();
-    }
+    } */
     agregar() {
       this.router.navigate(['/add-edit-patient', {}]);
     }
-    editarPaciente(index?: number) {
+    /* editarPaciente(index?: number) {
       const update = true;
       const id = index;
       const datos = { id, update };
       this.router.navigate(['/add-edit-patient', datos]);
-    }
-    showCita(index?: number) {
+    } */
+    /* showCita(index?: number) {
       const idPacie = index;
       const data = {
         idPaciente: idPacie
       }
       this.router.navigate(['/show-cita', data]);
-    }
+    } */
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -15,12 +16,14 @@ export class AddEditPatientPage implements OnInit {
   pacienteForm: FormGroup;
   update: boolean;
   id: number;
+  email: '';
   constructor(
     private router: Router,
     public alertController: AlertController,
     private pacienteList: PacientesService,
     private formBuilder: FormBuilder,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -28,14 +31,15 @@ export class AddEditPatientPage implements OnInit {
       this.id = data.id;
       this.update = data.update || false;
       if ( this.id !== undefined) {
-      this.paciente = this.pacienteList.getPaciente(this.id);
+      this.paciente = this.pacienteList.getPaciente('');
       } else {
         this.paciente = {
           name: "",
           lastName: "",
           edad: "",
           phone: "",
-          address: ""
+          address: "",
+          email: ""
         };
       }
     });
@@ -67,7 +71,7 @@ export class AddEditPatientPage implements OnInit {
         Validators.maxLength(35),
       ])),
     });
-
+    this.email = this.authService.getEmail();
   }
   save() {
     this.paciente = {
@@ -75,7 +79,8 @@ export class AddEditPatientPage implements OnInit {
       lastName: this.pacienteForm.value.lastName,
       edad: this.pacienteForm.value.edad,
       phone: this.pacienteForm.value.phone,
-      address: this.pacienteForm.value.address
+      address: this.pacienteForm.value.address,
+      email: this.email
     };
       if (this.update) {
         this.pacienteList.updatePaciente(this.id, this.paciente);

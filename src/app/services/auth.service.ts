@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+ email: '';
   constructor(public fbAuth: AngularFireAuthModule,
               private router: Router
     ) {
@@ -15,6 +15,7 @@ export class AuthService {
   }
 
   handlerRegister(value: any) {
+    this.email = value.email;
   return new Promise<any>((resolve, reject) => {
     firebase.auth().createUserWithEmailAndPassword(value.email,
       value.password)
@@ -37,6 +38,10 @@ export class AuthService {
         this.router.navigate(['../tabs/tab1']);
       }, err => reject(err));
     });
+  }
+
+  getEmail() {
+    return this.email;
   }
 }
 

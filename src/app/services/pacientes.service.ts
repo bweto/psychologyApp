@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from '../models/patient';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class PacientesService {
 
-  pacientes: any;
-
-  constructor(private http: HttpClient) {
-    this.pacientes = [
+  //pacientes: any;
+  pacientes: Observable<any[]>;
+  constructor(private http: HttpClient, 
+              private firestore: AngularFirestore) {
+    /* this.pacientes = [
       {
         name: 'Beto',
         lastName: 'Garcia',
@@ -17,7 +20,8 @@ export class PacientesService {
         phone: '3115011330',
         address: 'calle falsa 123'
       }
-    ];
+    ]; */
+    
   }
 
    getPacientes() {
@@ -25,20 +29,24 @@ export class PacientesService {
    }
    // Metodos para el CRUD del Paciente
    getAllPacientes() {
-    if (this.pacientes !== 'undefined' && this.pacientes !== null) {
+    /* if (this.pacientes !== 'undefined' && this.pacientes !== null) {
       return(this.pacientes);
-    }
+    } */
+    //return this.firestore.collection('pacientes').snapshotChanges();
    }
-   getPaciente(index: number) {
-    return this.pacientes[index];
+   getPaciente(index?: String) {
+    //return this.pacientes[index];
+    //this.firestore.collection('pacientes').doc(index).snapshotChanges();
    }
    createPaciente(paciente: any) {
-    this.pacientes.push(paciente);
+    //this.pacientes.push(paciente);
+    return this.firestore.collection('pacientes').add(paciente);
    }
-   updatePaciente(index: number, paciente: any) {
-    this.pacientes.splice(index, 1, paciente);
+   updatePaciente(index?: number, paciente?: any) {
+    //this.pacientes.splice(index, 1, paciente);
    }
-   deletePaciente(index: number) {
-    this.pacientes.splice(index, 1);
+   deletePaciente(index?: string, data?: any) {
+    //this.pacientes.splice(index, 1);
+    //return this.firestore.collection('pacientes').doc(index).set(data);
    }
 }
