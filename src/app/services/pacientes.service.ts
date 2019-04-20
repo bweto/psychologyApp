@@ -9,30 +9,14 @@ import { Observable } from 'rxjs';
 export class PacientesService {
 
   //pacientes: any;
-  pacientes: Observable<any[]>;
+  pacientes: any[] = [];
   constructor(private http: HttpClient, 
-              private firestore: AngularFirestore) {
-    /* this.pacientes = [
-      {
-        name: 'Beto',
-        lastName: 'Garcia',
-        edad: '27',
-        phone: '3115011330',
-        address: 'calle falsa 123'
-      }
-    ]; */
-    
+              private firestore: AngularFirestore) {   
   }
-
-   getPacientes() {
-    return this.http.get('https://randomuser.me/api/?results=15');
-   }
    // Metodos para el CRUD del Paciente
    getAllPacientes() {
-    /* if (this.pacientes !== 'undefined' && this.pacientes !== null) {
-      return(this.pacientes);
-    } */
-    //return this.firestore.collection('pacientes').snapshotChanges();
+    const tblPacientes = this.firestore.collection('pacientes');
+    return tblPacientes.snapshotChanges();
    }
    getPaciente(index?: String) {
     //return this.pacientes[index];

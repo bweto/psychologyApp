@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { Component, ViewChild} from '@angular/core';
 import { AlertController, IonList} from '@ionic/angular';
 import { PacientesService } from '../services/pacientes.service';
@@ -12,20 +13,35 @@ import { Observable } from 'rxjs';
 })
 export class Tab3Page {
   @ViewChild('listaPacientes') listRef: IonList;
-  pacientes: Observable<any[]>;
+  pacientes: any[] = [];
   index: number;
   id: string;
+  email: string;
   constructor (
     public pacientesService: PacientesService,
+    private authService: AuthService,
     private alertController: AlertController,
     private router: Router,
-    private activedRoute: ActivatedRoute,
 ) { }
 
   ngOnInit() {
-    /* this.pacientes = this.pacientesService.getAllPacientes();
-    this.index = this.pacientes.length; */
-    //this.pacientes = this.pacientesService.getAllPacientes()
+    this.email = this.authService.getEmail();
+    this.pacientesService.getAllPacientes()
+        .subscribe(paciente => {
+          console.log('primero',paciente);
+          paciente.forEach(data =>{
+            const info = data.payload.doc.data();
+            Object.values(info).map( val =>{
+              if(val === this.email){
+                this.pacientes.push(data.payload.doc.data());
+              }
+            })
+            
+          })
+        });
+
+    this.index = this.pacientes.length; 
+  
     }
    /*  async deletePaciente(index?: number) {
       console.log(index);
