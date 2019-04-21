@@ -16,11 +16,12 @@ export class Tab3Page {
   pacientes: any[] = [];
   index: number;
   id: string;
-  email: string;
+  email: string = '';
   constructor (
     public pacientesService: PacientesService,
     private authService: AuthService,
     private alertController: AlertController,
+    private mostrarController: AlertController,
     private router: Router,
 ) { 
   
@@ -36,7 +37,6 @@ export class Tab3Page {
     cargarDatos(){
       this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
-          console.log('primero',paciente);
           paciente.forEach(data =>{
             const paciente = data.payload.doc.data();
             const id = data.payload.doc.id
@@ -82,11 +82,28 @@ export class Tab3Page {
       this.pacientes = [];
       this.pacientesService.deletePaciente(index);
     }
-    /* showCita(index?: number) {
-      const idPacie = index;
-      const data = {
-        idPaciente: idPacie
+     async showCita(data) {
+      const msj = `Edad: ${data.edad} \n
+                   ${data.email} \n
+                   Tel: ${data.phone} \n
+                   ${data.address}`;
+      const mostrar = await this.mostrarController.create({
+        header: `${data.name} ${data.lastName}`,
+        message:  msj,
+        buttons: [
+          {
+            text: 'Cerrar',
+            role: 'cancelar'
+          }
+        ]
+      });
+      await mostrar.present();
+    } 
+    mostarPaciente(id: string){
+    this.pacientesService.getPaciente(id)
+        .subscribe(datos =>{
+          const data = datos.payload.data();
+          this.showCita(data);
+        })
       }
-      this.router.navigate(['/show-cita', data]);
-    } */
 }

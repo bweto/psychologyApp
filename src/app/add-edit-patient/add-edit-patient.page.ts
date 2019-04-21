@@ -33,11 +33,8 @@ export class AddEditPatientPage implements OnInit {
       if ( this.id !== undefined) {
       this.pacienteList.getPaciente(this.id)
         .subscribe(datos =>{
-          this.paciente = datos.payload.data();
-          console.log(this.paciente);            
+          this.paciente = datos.payload.data();          
         })
-        console.log('agregar',this.id);
-
       } else {
         this.paciente = {
           name: "",

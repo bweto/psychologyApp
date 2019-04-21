@@ -10,8 +10,7 @@ import * as firebase from 'firebase/app';
 export class PacientesService {
 
   constructor(private http: HttpClient, 
-              private firestore: AngularFirestore) {   
-  }
+              private firestore: AngularFirestore) { }
    // Metodos para el CRUD del Paciente
    getAllPacientes() {
     return this.firestore.collection('pacientes').snapshotChanges();
