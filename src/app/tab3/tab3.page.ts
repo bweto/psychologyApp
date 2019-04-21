@@ -85,8 +85,9 @@ export class Tab3Page {
      async showCita(data) {
       const msj = `Edad: ${data.edad} \n
                    ${data.email} \n
-                   Tel: ${data.phone} \n
-                   ${data.address}`;
+                   ${data.address} \n
+                   ${data.phone} \n`;
+                   
       const mostrar = await this.mostrarController.create({
         header: `${data.name} ${data.lastName}`,
         message:  msj,

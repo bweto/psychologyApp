@@ -86,13 +86,10 @@ export class AddEditPatientPage implements OnInit {
       email: this.email
     };
       if (this.update) {
-        console.log(this.paciente);
-        console.log(this.id);
         this.pacienteList.updatePaciente(this.id, this.paciente);
         this.router.navigate(['/tabs/tab3']);
       } else {
         this.pacienteList.createPaciente(this.paciente);
-        console.log(this.paciente);
         this.router.navigate(['/tabs/tab3']);
       }
     }

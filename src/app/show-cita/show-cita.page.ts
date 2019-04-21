@@ -9,8 +9,10 @@ import { CitaService } from '../services/cita.service';
   styleUrls: ['./show-cita.page.scss'],
 })
 export class ShowCitaPage implements OnInit {
-
-  @ViewChild('listaCitas') listRef: IonList;
+ngOnInit(){
+  
+}
+ /*  @ViewChild('listaCitas') listRef: IonList;
   citas: any [];
   index: number;
   idCita: number;
@@ -70,5 +72,5 @@ export class ShowCitaPage implements OnInit {
   }
   showCita(idCita: number) {
 
-  }
+  } */
 }

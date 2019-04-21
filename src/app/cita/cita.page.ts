@@ -9,8 +9,10 @@ import { CitaService } from '../services/cita.service';
   styleUrls: ['./cita.page.scss'],
 })
 export class CitaPage implements OnInit {
-
-  cita: any;
+  ngOnInit(){
+    
+  }
+/*   cita: any;
   citaForm: FormGroup;
   update: boolean;
   id: number;
@@ -59,7 +61,7 @@ export class CitaPage implements OnInit {
       ])),
       idPaciente: new FormControl(this.cita.Idpaciente || '', Validators.compose([
         //Validators.required,
-      ]))*/
+      ]))
 
     });
   }
@@ -83,5 +85,5 @@ save() {
       this.citaService.createCita(this.cita);
       this.router.navigate(['/show-cita']);
     }
-}
+} */
 }

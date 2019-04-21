@@ -23,6 +23,17 @@
           </ion-input>
       </ion-item>
       <ion-item>
+          <ion-select placeholder="Paciente" 
+                      okText="Seleccionar"
+                      cancelText="Atrás"
+                      [(ngModel)]="event.paciente">
+              <ion-select-option  
+                                  *ngFor="let p of nombresPacientes">
+                {{p}}
+              </ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
           <ion-label>Inició</ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
                         pickerFormat="MMM D:HH:mm" 

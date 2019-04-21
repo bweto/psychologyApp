@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { formatDate} from '@angular/common';
+import { AuthService } from './../services/auth.service';
+import { PacientesService } from '../services/pacientes.service';
+import { CitaService } from '../services/cita.service';
 
 @Component({
   selector: 'app-tab1',
@@ -18,6 +21,7 @@ export class Tab1Page implements OnInit{
   event = {
     title: '',
     desc: '',
+    paciente: '',
     startTime: '',
     endTime:'',
     allDay: false
@@ -27,21 +31,29 @@ export class Tab1Page implements OnInit{
     mode: 'day',
     currentDate: new Date()
   }
+  nombresPacientes:any[]=[];
+  email: string= '';
+  nombre: string='';
   viewTitle='';
   minDate = new Date().toISOString();
   @ViewChild(CalendarComponent) cal: CalendarComponent;
   constructor(private router: Router,
               private alertCtrl: AlertController,
-              @Inject(LOCALE_ID) private locale: string
+              @Inject(LOCALE_ID) private locale: string,
+              private authService: AuthService,
+              private pacientesService: PacientesService,
+              private citaService: CitaService,
     ) {}
     
     ngOnInit() {
       this.resetEvent();
+      this.obtenerPacientes();
     }
     resetEvent() {
       this.event = {
         title: '',
         desc: '',
+        paciente: '',
         startTime: new Date().toISOString(),
         endTime:new Date().toISOString(),
         allDay: false
@@ -51,6 +63,7 @@ export class Tab1Page implements OnInit{
       const newCita ={
         title: this.event.title,
         desc: this.event.desc,
+        paciente: this.event.paciente,
         startTime: new Date(this.event.startTime),
         endTime:new Date(this.event.endTime),
         allDay: this.event.allDay
@@ -70,6 +83,7 @@ export class Tab1Page implements OnInit{
                                     );           
       }
         this.eventSource.push(newCita);
+        this.crearCita(newCita)
         this.cal.loadEvents();
         this.resetEvent();      
     }
@@ -105,6 +119,24 @@ export class Tab1Page implements OnInit{
       this.event.endTime = (selected.toISOString());
     }
 
-    
+    obtenerPacientes(){
+      this.email = this.authService.getEmail();
+      this.pacientesService.getAllPacientes()
+        .subscribe(paciente => {
+          paciente.forEach(data =>{
+            const paciente = data.payload.doc.data();
+            console.log(paciente['name']);
+            const name = `${paciente['name']} ${paciente['lastName']}`;
+            const id = data.payload.doc.id
+              if(paciente['email'] === this.email){
+                this.nombresPacientes.push(name);
+              }
+          })
+        });
+    }
+
+    crearCita(cita: any){
+      this.citaService.createCita(cita);
+    }
    
 }
