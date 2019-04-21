@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar color="success">
     <ion-title>
       <ion-icon name="people"></ion-icon>
@@ -26,7 +26,7 @@
           </ion-col>
           <ion-col>
             <ion-buttons>
-                <ion-button (click)="deletePaciente(i)" color="danger">
+                <ion-button (click)="deletePaciente(p.id)" color="danger">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
                   </ion-button>
                   <ion-button (click)="editarPaciente(p.id)" color="primary">

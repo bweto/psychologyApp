@@ -49,7 +49,7 @@ export class Tab3Page {
         });
 
     }
-   /*  async deletePaciente(index?: number) {
+    async deletePaciente(index: string) {
       console.log(index);
       const alert = await this.alertController.create({
         header: index === undefined ? 'Borrar paciente' : 'Borrar paciente',
@@ -57,10 +57,7 @@ export class Tab3Page {
         buttons: [
           {
             text: 'Borrar',
-            handler: () => {
-                this.pacientesService.deletePaciente(index);
-
-            }
+            handler: ()=>{this.borrar(index)}
           },
           {
             text: 'CANCELAR',
@@ -69,8 +66,9 @@ export class Tab3Page {
         ]
       });
       await alert.present();
-    } */
+    } 
     agregar() {
+      this.pacientes = [];
       this.router.navigate(['/add-edit-patient', {}]);
     }
  
@@ -80,6 +78,10 @@ export class Tab3Page {
       this.pacientes=[];
       this.router.navigate(['/add-edit-patient', datos]);
     } 
+    borrar(index: string){
+      this.pacientes = [];
+      this.pacientesService.deletePaciente(index);
+    }
     /* showCita(index?: number) {
       const idPacie = index;
       const data = {

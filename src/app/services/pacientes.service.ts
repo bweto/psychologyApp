@@ -25,9 +25,8 @@ export class PacientesService {
    updatePaciente(id: string, paciente: any) {
     return this.firestore.collection('pacientes').doc(id).set(paciente);
    }
-   deletePaciente(index?: string, data?: any) {
-    //this.pacientes.splice(index, 1);
-    //return this.firestore.collection('pacientes').doc(index).set(data);
+   deletePaciente(index: string) {
+    return this.firestore.collection('pacientes').doc(index).delete();
    }
    
 }
