@@ -70,7 +70,7 @@ export class Tab1Page implements OnInit{
         paciente: this.event.paciente,
         startTime: new Date(this.event.startTime),
         endTime:new Date(this.event.endTime),
-        allDay: this.event.allDay
+        allDay: this.event.allDay,
         email: this.email
       }
       console.log(newCita);
@@ -108,8 +108,8 @@ export class Tab1Page implements OnInit{
       const alert = await this.alertCtrl.create({
         header: this.event.title,
         subHeader: this.event.desc,
-        message: 'From: ' + start + '<br><br>To: ' + end,
-        buttons: ['Ok']
+        message: 'Inicio: ' + start + '<br><br>Fin: ' + end,
+        buttons: ['Salir']
       });
       alert.present();
     }
@@ -148,12 +148,14 @@ export class Tab1Page implements OnInit{
           cita.forEach(data =>{
             const cita = data.payload.doc.data();
             const id = data.payload.doc.id
-              if(cita['email'] === this.email){
+              if (cita['email'] === this.email) {
+                const start = cita['startTime'].toDate();
+                const fin = cita['endTime'].toDate();
+                cita['startTime'] = start;
+                cita['endTime'] = fin;
                 this.eventSource.push(cita);
               }
-          })
+          });
         });
-        this.cal.loadEvents();
     }
-   
 }
