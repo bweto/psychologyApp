@@ -24,7 +24,8 @@ export class Tab1Page implements OnInit{
     paciente: '',
     startTime: '',
     endTime:'',
-    allDay: false
+    allDay: false,
+    email: ''
   }
   eventSource = [];
   calendar = {
@@ -46,8 +47,10 @@ export class Tab1Page implements OnInit{
     ) {}
     
     ngOnInit() {
+      this.email = this.authService.getEmail();
       this.resetEvent();
       this.obtenerPacientes();
+      this.obtenerCitas();
     }
     resetEvent() {
       this.event = {
@@ -56,7 +59,8 @@ export class Tab1Page implements OnInit{
         paciente: '',
         startTime: new Date().toISOString(),
         endTime:new Date().toISOString(),
-        allDay: false
+        allDay: false,
+        email: ''
       }
     }
     addCita(){
@@ -67,6 +71,7 @@ export class Tab1Page implements OnInit{
         startTime: new Date(this.event.startTime),
         endTime:new Date(this.event.endTime),
         allDay: this.event.allDay
+        email: this.email
       }
       console.log(newCita);
       
@@ -120,7 +125,6 @@ export class Tab1Page implements OnInit{
     }
 
     obtenerPacientes(){
-      this.email = this.authService.getEmail();
       this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
           paciente.forEach(data =>{
@@ -137,6 +141,19 @@ export class Tab1Page implements OnInit{
 
     crearCita(cita: any){
       this.citaService.createCita(cita);
+    }
+    obtenerCitas(){
+      this.citaService.getAllCitas()
+        .subscribe(cita => {
+          cita.forEach(data =>{
+            const cita = data.payload.doc.data();
+            const id = data.payload.doc.id
+              if(cita['email'] === this.email){
+                this.eventSource.push(cita);
+              }
+          })
+        });
+        this.cal.loadEvents();
     }
    
 }
