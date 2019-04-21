@@ -12,10 +12,10 @@ import {PacientesService} from '../services/pacientes.service';
 })
 
 export class AddEditPatientPage implements OnInit {
-  paciente: any;
+  paciente: any = {};
   pacienteForm: FormGroup;
   update: boolean;
-  id: number;
+  id: string;
   email: '';
   constructor(
     private router: Router,
@@ -31,7 +31,13 @@ export class AddEditPatientPage implements OnInit {
       this.id = data.id;
       this.update = data.update || false;
       if ( this.id !== undefined) {
-      this.paciente = this.pacienteList.getPaciente('');
+      this.pacienteList.getPaciente(this.id)
+        .subscribe(datos =>{
+          this.paciente = datos.payload.data();
+          console.log(this.paciente);            
+        })
+        console.log('agregar',this.id);
+
       } else {
         this.paciente = {
           name: "",
@@ -83,8 +89,9 @@ export class AddEditPatientPage implements OnInit {
       email: this.email
     };
       if (this.update) {
-        this.pacienteList.updatePaciente(this.id, this.paciente);
         console.log(this.paciente);
+        console.log(this.id);
+        this.pacienteList.updatePaciente(this.id, this.paciente);
         this.router.navigate(['/tabs/tab3']);
       } else {
         this.pacienteList.createPaciente(this.paciente);

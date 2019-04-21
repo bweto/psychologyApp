@@ -17,7 +17,7 @@
         <ion-button color="danger" (click)="atras()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
-        <ion-button color="primary" (click)="save()" [disabled]="!pacienteForm.valid">
+        <ion-button color="primary" (click)="save()" >
           <ion-icon slot="icon-only" name="checkmark"></ion-icon>
         </ion-button>
     </ion-buttons>
@@ -27,23 +27,23 @@
       <form [formGroup]="pacienteForm">
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input formControlName="name" ></ion-input>      
+        <ion-input formControlName="name" [(ngModel)]="paciente.name"></ion-input>      
       </ion-item>
       <ion-item>
         <ion-label position="floating">Apellidos</ion-label>
-        <ion-input formControlName="lastName"></ion-input>
+        <ion-input formControlName="lastName"[(ngModel)]="paciente.lastName"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label position="floating">Edad</ion-label>
-          <ion-input formControlName="edad"></ion-input>
+          <ion-input formControlName="edad" [(ngModel)]="paciente.edad"></ion-input>
       </ion-item>
       <ion-item>
             <ion-label position="floating">Teléfono</ion-label>
-            <ion-input formControlName="phone"></ion-input>
+            <ion-input formControlName="phone" [(ngModel)]="paciente.phone"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label position="floating">Dirección</ion-label>
-              <ion-input formControlName="address"></ion-input>
+              <ion-input formControlName="address" [(ngModel)]="paciente.address"></ion-input>
             </ion-item>
       </form>
 </ion-content>

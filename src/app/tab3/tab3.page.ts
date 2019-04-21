@@ -22,26 +22,32 @@ export class Tab3Page {
     private authService: AuthService,
     private alertController: AlertController,
     private router: Router,
-) { }
+) { 
+  
+}
 
   ngOnInit() {
     this.email = this.authService.getEmail();
-    this.pacientesService.getAllPacientes()
+    this.cargarDatos();
+    this.index = this.pacientes.length; 
+  
+    }
+   
+    cargarDatos(){
+      this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
           console.log('primero',paciente);
           paciente.forEach(data =>{
-            const info = data.payload.doc.data();
-            Object.values(info).map( val =>{
+            const paciente = data.payload.doc.data();
+            const id = data.payload.doc.id
+            Object.values(paciente).map( val =>{
               if(val === this.email){
-                this.pacientes.push(data.payload.doc.data());
+                this.pacientes.push({id, paciente });
               }
             })
-            
           })
         });
 
-    this.index = this.pacientes.length; 
-  
     }
    /*  async deletePaciente(index?: number) {
       console.log(index);
@@ -67,12 +73,13 @@ export class Tab3Page {
     agregar() {
       this.router.navigate(['/add-edit-patient', {}]);
     }
-    /* editarPaciente(index?: number) {
+ 
+    editarPaciente(id: string) {
       const update = true;
-      const id = index;
       const datos = { id, update };
+      this.pacientes=[];
       this.router.navigate(['/add-edit-patient', datos]);
-    } */
+    } 
     /* showCita(index?: number) {
       const idPacie = index;
       const data = {
