@@ -13,14 +13,15 @@ import { AppComponent } from './app.component';
 import { LoginPageModule } from './login/login.module';
 import { PacientesService } from './services/pacientes.service';
 import { RegistrationPatientComponent } from './registration-patient/registration-patient.component';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';//'angularfire2';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';//'angularfire2/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+//'angularfire2/auth';
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationPatientComponent
+    RegistrationPatientComponent,  
   ],
   entryComponents: [],
   imports: [
@@ -33,7 +34,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
   ],
   providers: [
     StatusBar,

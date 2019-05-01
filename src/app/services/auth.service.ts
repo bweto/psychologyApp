@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';//'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class AuthService {
       });
     });
   }
-  
+
   handlerLogin(value: any) {
     return new Promise<any> ((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)

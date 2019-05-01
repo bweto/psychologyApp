@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { ModalController } from '@ionic/angular';
+import { PoliticaPagePage } from '../modales/politica-page/politica-page.page';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +38,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+   // private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -72,4 +75,14 @@ export class LoginPage implements OnInit {
      });
   }
 
+  /* async politica() {
+    const modal = await this.modalCtrl.create({
+      component: PoliticaPagePage,
+      componentProps: {
+        titulo: 'Politíca de Privacidad',
+        body: 'Costa Rica'
+      }
+    });
+    await modal.present();
+  } */
 }

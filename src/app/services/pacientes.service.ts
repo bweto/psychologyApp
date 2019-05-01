@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from '../models/patient';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';//'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 @Injectable({

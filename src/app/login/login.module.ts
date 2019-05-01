@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
+import { PoliticaPagePageModule } from '../modales/politica-page/politica-page.module';
+
 
 
 const routes: Routes = [
@@ -27,7 +29,8 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    //PoliticaPagePageModule
   ],
   declarations: [LoginPage],
 })

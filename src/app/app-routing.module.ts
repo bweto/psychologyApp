@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'cita:data', loadChildren: './cita/cita.module#CitaPageModule' },
   { path: 'show-cita', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
   { path: 'show-cita:data', loadChildren: './show-cita/show-cita.module#ShowCitaPageModule' },
+  { path: 'politica-page', loadChildren: './modales/politica-page/politica-page.module#PoliticaPagePageModule' },
   
 ];
 @NgModule({
