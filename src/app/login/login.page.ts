@@ -5,21 +5,33 @@ import {
   FormBuilder,
   FormControl,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { UsuariosService } from '../services/usuarios.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   animations: [
-    // animation triggers go here
   ],
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-  user: any;
+  user: any = {
+    email: '',
+    password: '',
+    confPassword: ''
+  };
+  usuarios = [];
+  existeUs = false;
+  label = 'Regístrate';
+  passwordValid = false;
+  acepto = false;
+  conectando = false;
   error_messages = {
     'email': [
     {type: 'required', message: 'Digita un Email.'},
@@ -31,16 +43,25 @@ export class LoginPage implements OnInit {
       {type: 'required', message: 'Digita la contraseña'},
       {type: 'minlength', message: 'La contraseña debe tener mas de 6 caracteres'},
       {type: 'maxlength', message: 'La contraseña no puede tene mas de 10 caracteres.'}
-      ]
+      ],
+      'confPassword': [
+        {type: 'required', message: 'Digita la contraseña'},
+        {type: 'minlength', message: 'La contraseña debe tener mas de 6 caracteres'},
+        {type: 'maxlength', message: 'La contraseña no puede tene mas de 10 caracteres.'}
+        ]
+
   };
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private usuarioService: UsuariosService,
+    public toastController: ToastController
   ) {}
 
   ngOnInit() {
+    this.cargarUsuarios();
     this.loginForm = this.formBuilder.group({
       email: ['', [
         Validators.required,
@@ -52,26 +73,40 @@ export class LoginPage implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(10)
-      ]))
+      ])),
+      confPassword: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(10),
+      ]]
     });
   }
-
    login() {
      this.user = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
      };
-
-    this.authService.handlerRegister(this.user)
-     .then(() => {
-      this.router.navigate(['../tabs/tab1']);
-     })
-     .catch(() => {
+     this.conectando = true;
+     if (this.label === 'Iniciar Sesión') {
       this.authService.handlerLogin(this.user)
        .then( () => {
         this.router.navigate(['../tabs/tab1']);
+       })
+       .catch(err => {
+         if (err['code'] === "auth/wrong-password") {
+          this.presentToast('Contraseña invalida', 'danger');
+         } else {
+          this.presentToast('Ingresa un correo valido', 'danger');
+         }
+         this.conectando = false;
        });
+     } else {
+      this.usuarioService.agregarUsuario(this.user.email);
+      this.authService.handlerRegister(this.user)
+     .then(() => {
+      this.router.navigate(['../tabs/tab1']);
      });
+     }
   }
 
   async politica() {
@@ -99,17 +134,58 @@ export class LoginPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            this.acepto = false;
+            this.presentToast('Debes aceptar la política para usar la aplicación', 'danger');
           }
         }, {
           text: 'Acepto',
           handler: () => {
-            console.log('Confirm Ok');
+            this.acepto = true;
+            this.presentToast('Gracias por aceptar, disfruta la aplicación', 'success');
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  cargarUsuarios() {
+    this.usuarioService.obtenerUsuarios()
+      .subscribe(data => {
+        data.forEach(usuario => {
+          this.usuarios.push(usuario.payload.doc.data()['mail']);
+        });
+      });
+  }
+  existe( event ) {
+    if (this.usuarios.includes(event.detail.value)) {
+      this.label = 'Iniciar Sesión';
+      this.existeUs = true;
+      this.acepto = true;
+      return;
+    } else {
+      this.existeUs = false;
+      this.acepto = false;
+    }
+  }
+  esIgual(password, confPassword) {
+    if ( password === confPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  async presentToast(mensaje: string, color: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 1500,
+      animated: true,
+      color: color,
+      keyboardClose: true,
+      position: 'top',
+      mode: 'ios'
+    });
+    toast.present();
   }
 }

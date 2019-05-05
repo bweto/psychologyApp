@@ -8,15 +8,19 @@
           </ion-avatar>
         </div>
         <div class="pt box">
-            <p>Psicología</p>
+            <h4>Psicología</h4>
         </div>
         
         <form [formGroup]="loginForm">
           <ion-item >
             <ion-label position="floating">
-              Usuario
+              Correo electrónico
             </ion-label>
-            <ion-input type="text" formControlName="email"> </ion-input>
+            <ion-input type="email" 
+                       formControlName="email"
+                       autoFocus="true"
+                       inputmode="email"
+                       (ionChange)="existe($event)" > </ion-input>
           </ion-item>
           <div class="error-messages small-nine">
             <ng-container *ngFor="let error of error_messages.email">
@@ -36,7 +40,11 @@
             <ion-label position="floating">
               Contraseña
             </ion-label>
-            <ion-input type="password" formControlName="password"> </ion-input>
+            <ion-input type="password" 
+                       formControlName="password"
+                       inputmode="password"
+                       pattern="password"
+                       > </ion-input>
           </ion-item>
           <div class="error-messages small-nine">
             <ng-container *ngFor="let error of error_messages.password">
@@ -52,9 +60,41 @@
               </div>
             </ng-container>
           </div>
+          <ion-item *ngIf="!existeUs">
+            <ion-label position="floating">
+              Confirmar Contraseña
+            </ion-label>
+            <ion-input type="password" 
+                       formControlName="confPassword"
+                       inputmode="password"
+                       pattern="password"></ion-input>
+          </ion-item>
+          <div class="error-messages small-nine">
+            <ng-container *ngFor="let error of error_messages.password">
+              <div
+                class="error-messages small-nine"
+                *ngIf="
+                  loginForm.get('confPassword').hasError(error.type) &&
+                  (loginForm.get('confPassword').dirty ||
+                    loginForm.get('confPassword').touched) 
+                "
+              >
+                {{ error.message }}
+                
+              </div>
+            </ng-container>
+              <div *ngIf=" !esIgual(loginForm.get('password').value, loginForm.get('confPassword').value)">
+                <span *ngIf="!existeUs">
+                  Las contraseñas no coinciden
+                </span>
+              </div>
+          </div>
           <div class="box">
+              <span *ngIf="!acepto" class="error-messages small-nine">
+                  Debes aceptar la política de privacidad 
+                </span>
           <ion-button
-            [disabled]="!loginForm.valid"
+            [disabled]="!loginForm.valid && !acepto"
             shape="round"
             color="primary"
             (click)="login()"
@@ -64,20 +104,20 @@
             fill="outline"
             strong="true"
           >
-            <span>Iniciar Sesión</span>
+            <span>{{label}}</span>
           </ion-button>
         </div>
         </form>
-        <div class="center-nowrap">
-          <p class="small-nine">Al tocar iniciar sesión, aceptas la 
+        <div class="center-nowrap" *ngIf="!existeUs">
+          <p class="small-nine">Debes aceptar la 
             <a class="register-messsages small-nine" (click)="politica()">
               política de privacidad.
             </a>
           </p>     
-          
         </div> 
       </ion-col>
     </ion-row>
+    <ion-spinner *ngIf="conectando" name="dots"></ion-spinner>
   </ion-grid>
  
 </ion-content>
