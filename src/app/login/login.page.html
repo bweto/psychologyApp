@@ -8,7 +8,7 @@
           </ion-avatar>
         </div>
         <div class="pt box">
-            <p>Login</p>
+            <p>Psicología</p>
         </div>
         
         <form [formGroup]="loginForm">
@@ -56,27 +56,26 @@
           <ion-button
             [disabled]="!loginForm.valid"
             shape="round"
-            color="danger"
+            color="primary"
             (click)="login()"
             strong="true"
             class="pt"
-            expand="full"
+            expand="block"
+            fill="outline"
+            strong="true"
           >
-            <p>Iniciar</p>
+            <span>Iniciar Sesión</span>
           </ion-button>
         </div>
         </form>
-
         <div class="center-nowrap">
-          <p class="small-nine">Deseas 
-            <a class="register-messsages small-nine" 
-                
-            >
-              Registrarte
+          <p class="small-nine">Al tocar iniciar sesión, aceptas la 
+            <a class="register-messsages small-nine" (click)="politica()">
+              política de privacidad.
             </a>
           </p>     
           
-        </div>
+        </div> 
       </ion-col>
     </ion-row>
   </ion-grid>

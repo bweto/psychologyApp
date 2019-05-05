@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -72,4 +74,42 @@ export class LoginPage implements OnInit {
      });
   }
 
+  async politica() {
+    const politica = `<p>PsicologyApp almacena datos privados de sus pacientes los cuales sera utilizados 
+                      por el usuario para gestionar y administrar citas de seguimiento de estos. Estos 
+                      datos no serán utilizados por PsicologyApp, para ofrecer algún servicio o analizar 
+                      dichos datos.<br><br>
+                      La información sera almacenada en una base de datos de manera segura, al momento 
+                      de borrar un paciente este sera eliminado de forma completa y dicha información 
+                      sera irrecuperable.<br><br>
+                      La información del usuario de PsicologyApp como su correo electrónico tendrá un 
+                      uso solo al momento de realizar la autenticación en PsicologyApp.<br><br></p>
+                      `;
+    const alert = await this.alertCtrl.create({
+      header: 'Política de Privacidad',
+      message: politica,
+      animated: true,
+      backdropDismiss: false,
+      keyboardClose: false,
+      translucent: true,
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Acepto',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
