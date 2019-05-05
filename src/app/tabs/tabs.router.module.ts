@@ -12,6 +12,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab1/tab1.module#Tab1PageModule'
+          },
+          {
+            path: '**',
+            loadChildren: '../tab1/tab1.module#Tab1PageModule'
           }
         ]
       },
@@ -21,6 +25,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab3/tab3.module#Tab3PageModule'
+          },
+          {
+            path: '**',
+            loadChildren: '../tab3/tab3.module#Tab3PageModule'
           }
         ]
       },
@@ -28,7 +36,8 @@ const routes: Routes = [
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
-      }
+      },
+      
     ]
   }
 ];

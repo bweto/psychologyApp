@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormControl,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';

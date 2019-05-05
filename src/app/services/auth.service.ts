@@ -3,13 +3,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
  email: '';
   constructor(public fbAuth: AngularFireAuthModule,
-              private router: Router
+              private router: Router,
+              public toastController: ToastController
     ) {
     firebase.initializeApp(environment.firebase);
   }
@@ -42,6 +44,29 @@ export class AuthService {
 
   getEmail() {
     return this.email;
+  }
+
+  salir() {
+    firebase.auth().signOut()
+    .then(() =>{
+      this.presentToast('Adios', 'success');
+    })
+    .catch(err =>{
+      this.presentToast('lo sentimos no fue posible cerrar la sesión', 'danger');
+    });
+  }
+
+  async presentToast(mensaje: string, color: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 1500,
+      animated: true,
+      color: color,
+      keyboardClose: true,
+      position: 'top',
+      mode: 'ios'
+    });
+    toast.present();
   }
 }
 

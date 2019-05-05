@@ -158,4 +158,8 @@ export class Tab1Page implements OnInit{
           });
         });
     }
+    salir() {
+      this.authService.salir();
+      this.router.navigate(['/login']);
+    }
 }

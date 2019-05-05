@@ -1,5 +1,5 @@
 <ion-content color="Light" slots="fixed" padding>
-  <ion-grid class="max-height box">
+  <ion-grid class="max-height box lightSpeedOut">
     <ion-row>
       <ion-col>
         <div class="box">
@@ -108,16 +108,21 @@
           </ion-button>
         </div>
         </form>
-        <div class="center-nowrap" *ngIf="!existeUs">
-          <p class="small-nine">Debes aceptar la 
+        <div class="center-nowrap" >
+          <p class="small-nine" *ngIf="!existeUs">Debes aceptar la 
             <a class="register-messsages small-nine" (click)="politica()">
               política de privacidad.
             </a>
-          </p>     
-        </div> 
+          </p>   
+        </div>
+        <div class="center-nowrap">
+            <div class="box">
+                <ion-spinner *ngIf="conectando" name="dots" ></ion-spinner>
+            </div> 
+        </div>
       </ion-col>
     </ion-row>
-    <ion-spinner *ngIf="conectando" name="dots"></ion-spinner>
+
   </ion-grid>
- 
+  
 </ion-content>
