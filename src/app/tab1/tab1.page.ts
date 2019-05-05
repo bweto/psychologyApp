@@ -23,19 +23,19 @@ export class Tab1Page implements OnInit{
     desc: '',
     paciente: '',
     startTime: '',
-    endTime:'',
+    endTime: '',
     allDay: false,
     email: ''
-  }
+  };
   eventSource = [];
   calendar = {
     mode: 'day',
     currentDate: new Date()
-  }
-  nombresPacientes:any[]=[];
-  email: string= '';
-  nombre: string='';
-  viewTitle='';
+  };
+  nombresPacientes: any[] = [];
+  email = '';
+  nombre = '';
+  viewTitle = '';
   minDate = new Date().toISOString();
   @ViewChild(CalendarComponent) cal: CalendarComponent;
   constructor(private router: Router,
@@ -45,7 +45,7 @@ export class Tab1Page implements OnInit{
               private pacientesService: PacientesService,
               private citaService: CitaService,
     ) {}
-    
+
     ngOnInit() {
       this.email = this.authService.getEmail();
       this.resetEvent();
@@ -58,24 +58,23 @@ export class Tab1Page implements OnInit{
         desc: '',
         paciente: '',
         startTime: new Date().toISOString(),
-        endTime:new Date().toISOString(),
+        endTime: new Date().toISOString(),
         allDay: false,
         email: ''
-      }
+      };
     }
-    addCita(){
-      const newCita ={
+    addCita() {
+      const newCita = {
         title: this.event.title,
         desc: this.event.desc,
         paciente: this.event.paciente,
         startTime: new Date(this.event.startTime),
-        endTime:new Date(this.event.endTime),
+        endTime: new Date(this.event.endTime),
         allDay: this.event.allDay,
         email: this.email
-      }
-      console.log(newCita);
-      
-      if(newCita.allDay){
+      };
+
+      if (newCita.allDay) {
         const start = newCita.startTime;
         const end = newCita.endTime;
         newCita.startTime = new Date(Date.UTC(start.getUTCFullYear(),
@@ -85,24 +84,24 @@ export class Tab1Page implements OnInit{
         newCita.endTime = new Date(Date.UTC(end.getUTCFullYear(),
                                               end.getUTCMonth(),
                                               end.getUTCDate() + 1)
-                                    );           
+                                    );
       }
         this.eventSource.push(newCita);
-        this.crearCita(newCita)
+        this.crearCita(newCita);
         this.cal.loadEvents();
-        this.resetEvent();      
+        this.resetEvent();
     }
-    
-    changeMode(mode: string){
+
+    changeMode(mode: string) {
       this.calendar.mode = mode;
     }
-    today(){
+    today() {
       this.calendar.currentDate = new Date();
     }
-    onCurrentDateChanged(evn){
+    onCurrentDateChanged(evn) {
 
     }
-    async onEventSelected(env){
+    async onEventSelected(env) {
       const start = formatDate(this.event.startTime, 'medium', this.locale);
       const end = formatDate(this.event.endTime, 'medium', this.locale);
       const alert = await this.alertCtrl.create({
@@ -114,20 +113,20 @@ export class Tab1Page implements OnInit{
       alert.present();
     }
 
-    onViewTitleChanged(title){
+    onViewTitleChanged(title) {
       this.viewTitle = title;
     }
-    onTimeSelected(env){
+    onTimeSelected(env) {
       const selected = new Date(env.selectedTime);
       this.event.startTime = selected.toISOString();
       selected.setHours(selected.getHours() + 1);
       this.event.endTime = (selected.toISOString());
     }
 
-    obtenerPacientes(){
+    obtenerPacientes() {
       this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
-          paciente.forEach(data =>{
+          paciente.forEach(data => {
             const paciente = data.payload.doc.data();
             console.log(paciente['name']);
             const name = `${paciente['name']} ${paciente['lastName']}`;
@@ -135,19 +134,19 @@ export class Tab1Page implements OnInit{
               if(paciente['email'] === this.email){
                 this.nombresPacientes.push(name);
               }
-          })
+          });
         });
     }
 
-    crearCita(cita: any){
+    crearCita(cita: any) {
       this.citaService.createCita(cita);
     }
-    obtenerCitas(){
+    obtenerCitas() {
       this.citaService.getAllCitas()
         .subscribe(cita => {
-          cita.forEach(data =>{
+          cita.forEach(data => {
             const cita = data.payload.doc.data();
-            const id = data.payload.doc.id
+            const id = data.payload.doc.id;
               if (cita['email'] === this.email) {
                 const start = cita['startTime'].toDate();
                 const fin = cita['endTime'].toDate();

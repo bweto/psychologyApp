@@ -1,6 +1,6 @@
 <ion-header no-border>
    
-  <ion-toolbar color="danger">
+  <ion-toolbar color="bar">
     <ion-title>Psicología</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="salir()">
@@ -72,21 +72,21 @@
   <ion-row>
     <ion-col size="4">
       <ion-button expand="block"
-                  [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" 
+                  [color]="calendar.mode == 'month' ? 'bar' : 'bar-secondary'" 
                   (click)="changeMode('month')">
         Mes
       </ion-button>
     </ion-col>
     <ion-col size="4">
         <ion-button expand="block"
-                    [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" 
+                    [color]="calendar.mode == 'week' ? 'bar' : 'bar-secondary'" 
                     (click)="changeMode('week')">
         Semana
         </ion-button>
     </ion-col>
     <ion-col size="4">
         <ion-button expand="block"
-                    [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" 
+                    [color]="calendar.mode == 'day' ? 'bar' : 'bar-secondary'" 
                     (click)="changeMode('day')">
                     
         Día

@@ -1,11 +1,14 @@
 <ion-header no-border>
-  <ion-toolbar color="success">
+  <ion-toolbar color="bar">
+    <ion-buttons slot="start">
+        <ion-icon slot="icon-only" name="people"></ion-icon>
+    </ion-buttons>
     <ion-title>
-      <ion-icon name="people"></ion-icon>
       Pacientes
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-list #listaCitas lines="full">
     <ion-item *ngFor="let p of pacientes;let i = index">
