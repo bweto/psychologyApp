@@ -33,15 +33,19 @@
           <ion-select placeholder="Paciente" 
                       okText="Seleccionar"
                       cancelText="Atrás"
+                      placeholder="seleccione paciente"
+                      fill="outline"
+                      class="maxWidth"
+                      name="patiens"
+                      class="maxWidth"
                       [(ngModel)]="event.paciente">
-              <ion-select-option  
-                                  *ngFor="let p of nombresPacientes">
+              <ion-select-option *ngFor="let p of nombresPacientes">
                 {{p}}
               </ion-select-option>
           </ion-select>
       </ion-item>
       <ion-item>
-          <ion-label>Inició</ion-label>
+          <ion-label position="floating">Inició</ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
                         pickerFormat="MMM D:HH:mm" 
                         [(ngModel)]="event.startTime" 
@@ -49,21 +53,18 @@
           </ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-label>Fin</ion-label>
+          <ion-label position="floating">Fin</ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
                         pickerFormat="MMM D:HH:mm" 
                         [(ngModel)]="event.endTime" 
                         [min]="minDate" >
           </ion-datetime>
       </ion-item>
-      <ion-item>
-          <ion-label>Todo el día</ion-label>
-          <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
-      </ion-item>
       <ion-button  fill="outline"
                    expand="block"
-                   [disabled]="event.title == ''"
-                  (click)="addCita()">
+                   [disabled]="(event.title == '' && event.desc == '')"
+                  (click)="addCita()"
+                  >
         Crear Cita
       </ion-button>
     </ion-card-content>

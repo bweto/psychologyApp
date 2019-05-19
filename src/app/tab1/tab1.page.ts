@@ -1,7 +1,7 @@
-import { Component, 
-          OnInit, 
-          ViewChild, 
-          Inject, 
+import { Component,
+          OnInit,
+          ViewChild,
+          Inject,
           LOCALE_ID} from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
@@ -29,7 +29,7 @@ export class Tab1Page implements OnInit{
   };
   eventSource = [];
   calendar = {
-    mode: 'day',
+    mode: 'month',
     currentDate: new Date()
   };
   nombresPacientes: any[] = [];
@@ -73,19 +73,6 @@ export class Tab1Page implements OnInit{
         allDay: this.event.allDay,
         email: this.email
       };
-
-      if (newCita.allDay) {
-        const start = newCita.startTime;
-        const end = newCita.endTime;
-        newCita.startTime = new Date(Date.UTC(start.getUTCFullYear(),
-                                              start.getUTCMonth(),
-                                              start.getUTCDate())
-                                      );
-        newCita.endTime = new Date(Date.UTC(end.getUTCFullYear(),
-                                              end.getUTCMonth(),
-                                              end.getUTCDate() + 1)
-                                    );
-      }
         this.eventSource.push(newCita);
         this.crearCita(newCita);
         this.cal.loadEvents();
@@ -119,7 +106,7 @@ export class Tab1Page implements OnInit{
     onTimeSelected(env) {
       const selected = new Date(env.selectedTime);
       this.event.startTime = selected.toISOString();
-      selected.setHours(selected.getHours() + 1);
+      selected.setHours(selected.getHours()).toLocaleString();
       this.event.endTime = (selected.toISOString());
     }
 
@@ -128,7 +115,6 @@ export class Tab1Page implements OnInit{
         .subscribe(paciente => {
           paciente.forEach(data => {
             const paciente = data.payload.doc.data();
-            console.log(paciente['name']);
             const name = `${paciente['name']} ${paciente['lastName']}`;
             const id = data.payload.doc.id
               if(paciente['email'] === this.email){
@@ -141,6 +127,7 @@ export class Tab1Page implements OnInit{
     crearCita(cita: any) {
       this.citaService.createCita(cita);
     }
+
     obtenerCitas() {
       this.citaService.getAllCitas()
         .subscribe(cita => {
@@ -157,8 +144,10 @@ export class Tab1Page implements OnInit{
           });
         });
     }
+
     salir() {
       this.authService.salir();
       this.router.navigate(['/login']);
     }
+
 }

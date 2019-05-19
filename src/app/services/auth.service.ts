@@ -33,6 +33,7 @@ export class AuthService {
   }
   
   handlerLogin(value: any) {
+    this.email = value.email;
     return new Promise<any> ((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {

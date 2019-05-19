@@ -30,7 +30,7 @@ export class Tab3Page {
   ngOnInit() {
     this.email = this.authService.getEmail();
     this.cargarDatos();
-    this.index = this.pacientes.length; 
+    this.index = this.pacientes.length;
   
     }
    
