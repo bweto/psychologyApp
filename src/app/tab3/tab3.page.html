@@ -9,17 +9,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
   <ion-list >
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" lass="p20">
+          <ion-refresher-content
+          class="p20"
+          pullingIcon="arrow-dropdown"
+          pullingText="Jala para actualizar"
+          refreshingSpinner="lines-small"
+          refreshingText="Actualizando...">  
+        </ion-refresher-content>
+      </ion-refresher>
     <ion-item *ngFor="let p of pacientes;let i = index">
+        
     <ion-buttons slot="start">
       <ion-button (click)="mostarPaciente(p.id)" color="warning shade">
         <ion-icon name="happy" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
         
-            <ion-label text-wrap>
-              <h2>{{ p.paciente.name | uppercase }}</h2>
+            <ion-label text-wrap (click)="llamar(p.paciente.phone)">
+              <h2>{{ p.paciente.name  | uppercase }}</h2>
               <p>{{ p.paciente.phone }}</p>
             </ion-label>
             <ion-buttons slot="end">
@@ -30,11 +40,13 @@
                       <ion-icon slot="icon-only" name="create"></ion-icon>
                     </ion-button>  
             </ion-buttons>
+         
     </ion-item>
+
   </ion-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="false">
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="false">
     <ion-fab-button (click)="agregar()" translucent="true">
       <ion-icon name="add" ></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content>

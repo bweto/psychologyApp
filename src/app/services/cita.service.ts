@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
+import { ConnectService } from './connect.service';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class CitaService {
   
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore,
+    private connectService: ConnectService,
+    public toastController: ToastController
+    ) {}
   //CRUD de citas
   getAllCitas() {
     return this.firestore.collection('citas').snapshotChanges();

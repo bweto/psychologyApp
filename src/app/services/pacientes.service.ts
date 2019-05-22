@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from '../models/patient';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
+import { ConnectService } from './connect.service';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class PacientesService {
 
   constructor(private http: HttpClient, 
-              private firestore: AngularFirestore) { }
+              private firestore: AngularFirestore,
+              
+              ) { }
    // Metodos para el CRUD del Paciente
    getAllPacientes() {
     return this.firestore.collection('pacientes').snapshotChanges();

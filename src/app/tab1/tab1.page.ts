@@ -27,12 +27,12 @@ export class Tab1Page implements OnInit{
     allDay: false,
     email: ''
   };
-  eventSource = [];
+  eventSource: any[];
   calendar = {
     mode: 'month',
     currentDate: new Date()
   };
-  nombresPacientes: any[] = [];
+  nombresPacientes: any[];
   email = '';
   nombre = '';
   viewTitle = '';
@@ -44,13 +44,15 @@ export class Tab1Page implements OnInit{
               private authService: AuthService,
               private pacientesService: PacientesService,
               private citaService: CitaService,
-    ) {}
+    ) { }
 
     ngOnInit() {
       this.email = this.authService.getEmail();
-      this.resetEvent();
-      this.obtenerPacientes();
       this.obtenerCitas();
+      this.obtenerPacientes();
+      this.resetEvent();
+      this.cal.loadEvents();
+      
     }
     resetEvent() {
       this.event = {
@@ -89,12 +91,12 @@ export class Tab1Page implements OnInit{
 
     }
     async onEventSelected(env) {
-      const start = formatDate(this.event.startTime, 'medium', this.locale);
-      const end = formatDate(this.event.endTime, 'medium', this.locale);
+      const start = formatDate(env.startTime, 'medium', this.locale);
+      const end = formatDate(env.endTime, 'medium', this.locale);
       const alert = await this.alertCtrl.create({
-        header: this.event.title,
-        subHeader: this.event.desc,
-        message: 'Inicio: ' + start + '<br><br>Fin: ' + end,
+        header: env.title,
+        subHeader: env.desc,
+        message: env.paciente + '<br><br>Inicio: ' + start + '<br><br>Fin: ' + end,
         buttons: ['Salir']
       });
       alert.present();
@@ -111,15 +113,23 @@ export class Tab1Page implements OnInit{
     }
 
     obtenerPacientes() {
+      this.nombresPacientes = [];
       this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
+          this.nombresPacientes = [];
           paciente.forEach(data => {
             const paciente = data.payload.doc.data();
             const name = `${paciente['name']} ${paciente['lastName']}`;
             const id = data.payload.doc.id
-              if(paciente['email'] === this.email){
+            if (this.nombresPacientes === undefined) {
+              this.nombresPacientes = [];
+            }
+              if(paciente['email'] === this.email) {
                 this.nombresPacientes.push(name);
               }
+              this.nombresPacientes = this.nombresPacientes.filter((item, index, array) => {
+                return array.indexOf(item) === index;
+              })
           });
         });
     }
@@ -139,10 +149,14 @@ export class Tab1Page implements OnInit{
                 const fin = cita['endTime'].toDate();
                 cita['startTime'] = start;
                 cita['endTime'] = fin;
+                if(this.eventSource === undefined){
+                  this.eventSource = [];
+                }
                 this.eventSource.push(cita);
               }
           });
         });
+        
     }
 
     salir() {

@@ -3,9 +3,7 @@ import { Component, ViewChild} from '@angular/core';
 import { AlertController, IonList} from '@ionic/angular';
 import { PacientesService } from '../services/pacientes.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Patient } from '../models/patient';
-import { Observable } from 'rxjs';
-
+import { CallNumber } from '@ionic-native/call-number/ngx';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -23,9 +21,8 @@ export class Tab3Page {
     private alertController: AlertController,
     private mostrarController: AlertController,
     private router: Router,
-) { 
-  
-}
+    private callNumber: CallNumber
+) {}
 
   ngOnInit() {
     this.email = this.authService.getEmail();
@@ -37,10 +34,10 @@ export class Tab3Page {
     cargarDatos(){
       this.pacientesService.getAllPacientes()
         .subscribe(paciente => {
-          paciente.forEach(data =>{
+          paciente.forEach(data => {
             const paciente = data.payload.doc.data();
             const id = data.payload.doc.id
-            Object.values(paciente).map( val =>{
+            Object.values(paciente).map( val => {
               if(val === this.email){
                 this.pacientes.push({id, paciente });
               }
@@ -66,19 +63,20 @@ export class Tab3Page {
         ]
       });
       await alert.present();
-    } 
+    }
+
     agregar() {
       this.pacientes = [];
       this.router.navigate(['/add-edit-patient', {}]);
     }
- 
+
     editarPaciente(id: string) {
       const update = true;
       const datos = { id, update };
-      this.pacientes=[];
+      this.pacientes = [];
       this.router.navigate(['/add-edit-patient', datos]);
     } 
-    borrar(index: string){
+    borrar(index: string) {
       this.pacientes = [];
       this.pacientesService.deletePaciente(index);
     }
@@ -87,7 +85,6 @@ export class Tab3Page {
                    ${data.email} \n
                    ${data.address} \n
                    ${data.phone} \n`;
-                   
       const mostrar = await this.mostrarController.create({
         header: `${data.name} ${data.lastName}`,
         message:  msj,
@@ -99,12 +96,23 @@ export class Tab3Page {
         ]
       });
       await mostrar.present();
-    } 
+    }
     mostarPaciente(id: string){
     this.pacientesService.getPaciente(id)
         .subscribe(datos =>{
           const data = datos.payload.data();
           this.showCita(data);
-        })
+        });
+      }
+
+      llamar(numero) {
+        this.callNumber.callNumber(numero, true)
+        .then()
+      .catch();
+      }
+      doRefresh(event) {
+        this.pacientes = [];
+        this.cargarDatos();
+        event.target.complete();
       }
 }

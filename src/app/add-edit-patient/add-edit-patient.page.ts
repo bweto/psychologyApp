@@ -33,56 +33,28 @@ export class AddEditPatientPage implements OnInit {
       if ( this.id !== undefined) {
       this.pacienteList.getPaciente(this.id)
         .subscribe(datos =>{
-          this.paciente = datos.payload.data();          
+          this.paciente = datos.payload.data();
         })
       } else {
         this.paciente = {
-          name: "",
-          lastName: "",
-          edad: "",
-          phone: "",
-          address: "",
-          email: ""
+          name: '',
+          lastName: '',
+          edad: '',
+          phone: '',
+          address: '',
+          email: ''
         };
       }
-    });
-    this.pacienteForm = this.formBuilder.group({
-      name: [this.paciente.name || '', [
-        Validators.required,
-        Validators.maxLength(25),
-        Validators.pattern('^[a-zA-Z]+$')
-      ]],
-      lastName: new FormControl(this.paciente.lastName || '', Validators.compose([
-        Validators.required,
-        Validators.maxLength(25),
-        Validators.pattern('^[a-zA-Z]+$')
-      ])),
-      edad: new FormControl(this.paciente.edad || '', Validators.compose([
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(3),
-        Validators.pattern('^[0-9]+$')
-      ])),
-      phone: new FormControl(this.paciente.phone || '', Validators.compose([
-        Validators.required,
-        Validators.minLength(7),
-        Validators.maxLength(10),
-        Validators.pattern('^[0-9]+$')
-      ])),
-      address: new FormControl(this.paciente.address || '', Validators.compose([
-        Validators.required,
-        Validators.maxLength(35),
-      ])),
     });
     this.email = this.authService.getEmail();
   }
   save() {
     this.paciente = {
-      name: this.pacienteForm.value.name,
-      lastName: this.pacienteForm.value.lastName,
-      edad: this.pacienteForm.value.edad,
-      phone: this.pacienteForm.value.phone,
-      address: this.pacienteForm.value.address,
+      name: this.paciente.name,
+      lastName: this.paciente.lastName,
+      edad: this.paciente.edad,
+      phone: this.paciente.phone,
+      address: this.paciente.address,
       email: this.email
     };
       if (this.update) {

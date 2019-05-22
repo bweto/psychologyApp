@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
 import { UsuariosService } from '../services/usuarios.service';
 import { ToastController } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +57,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private alertCtrl: AlertController,
     private usuarioService: UsuariosService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private network: Network
   ) {}
 
   ngOnInit() {
@@ -89,11 +91,14 @@ export class LoginPage implements OnInit {
      if (this.label === 'Iniciar Sesión') {
       this.authService.handlerLogin(this.user)
        .then( () => {
+        this.conectando = false;
         this.router.navigate(['../tabs/tab1']);
        })
        .catch(err => {
          if (err['code'] === "auth/wrong-password") {
           this.presentToast('Contraseña invalida', 'danger');
+         } else if(err['code'] === "auth/network-request-failed" ){
+          this.presentToast('No tienes conexión a internet', 'danger');
          } else {
           this.presentToast('Ingresa un correo valido', 'danger');
          }
@@ -103,7 +108,13 @@ export class LoginPage implements OnInit {
       this.usuarioService.agregarUsuario(this.user.email);
       this.authService.handlerRegister(this.user)
      .then(() => {
+      this.conectando = false;
       this.router.navigate(['../tabs/tab1']);
+     }).catch( err => {
+       console.log('hola');
+      if (err['code'] === "auth/network-request-failed" ) {
+        this.presentToast('No tienes conexión a internet', 'danger');
+       }
      });
      }
   }
@@ -150,12 +161,18 @@ export class LoginPage implements OnInit {
   }
 
   cargarUsuarios() {
+    try {
     this.usuarioService.obtenerUsuarios()
       .subscribe(data => {
         data.forEach(usuario => {
           this.usuarios.push(usuario.payload.doc.data()['mail']);
         });
       });
+    }
+    catch(err){
+      this.presentToast('No tienes conexión a Internet', 'danger');
+    }
+      
   }
   existe( event ) {
     if (this.usuarios.includes(event.detail.value)) {
