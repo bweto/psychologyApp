@@ -32,16 +32,11 @@ export class AuthService {
         this.handlerLogin(value);
       });
     });
-  
   }
-  
+
   handlerLogin(value: any) {
-  
     this.email = value.email;
     return new Promise<any> ((resolve, reject) => {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(function() {
-      console.log(firebase.auth.Auth.Persistence.LOCAL);
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {
         resolve(res);
@@ -53,13 +48,6 @@ export class AuthService {
        }
     }
     );
-  })
-  .catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
-
   }
 
   getEmail() {
@@ -68,15 +56,13 @@ export class AuthService {
   }
 
   salir() {
-    
     firebase.auth().signOut()
-    .then(() =>{
+    .then(() => {
       this.presentToas('Adios', 'success');
     })
-    .catch(err =>{
+    .catch(err => {
       this.presentToas('lo sentimos no fue posible cerrar la sesión', 'danger');
     });
-  
   }
 
   async presentToas(mensaje: string, color: string) {

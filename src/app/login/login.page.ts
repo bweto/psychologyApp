@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 import { UsuariosService } from '../services/usuarios.service';
 import { ToastController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
-
+import { Dialogs } from '@ionic-native/dialogs/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -58,8 +58,21 @@ export class LoginPage implements OnInit {
     private alertCtrl: AlertController,
     private usuarioService: UsuariosService,
     public toastController: ToastController,
-    private network: Network
-  ) {}
+    public network: Network,
+    public dialogs: Dialogs
+  ) {
+    this.network.onDisconnect()
+      .subscribe(() => {
+
+      });
+
+      this.network.onConnect()
+        .subscribe(() => {
+          setTimeout( () => {
+            this.dialogs.alert('No tienes conexión ' + this.network.type);
+          }, 2000);
+        });
+  }
 
   ngOnInit() {
     this.cargarUsuarios();

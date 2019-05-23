@@ -35,7 +35,7 @@
           </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Paciente</ion-label>
+        <ion-label position="floating">Paciente</ion-label>
           <ion-select 
                       okText="Seleccionar"
                       cancelText="Atrás"
@@ -54,19 +54,30 @@
       <ion-item>
           <ion-label position="floating">Inició</ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
-                        pickerFormat="MMM D:HH:mm" 
+                        pickerFormat="MMM D:HH:mm"
+                        month-names="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto,
+                                     Septiembre, Octubre, Noviembre, Diciembre"
+                        month-short-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                        cancelText="Atrás"
+                        doneText="Tomar"
                         [(ngModel)]="event.startTime"
                         name="startTime" 
-                        [min]="minDate" >
+                        >
+                       
           </ion-datetime>
       </ion-item>
       <ion-item>
           <ion-label position="floating">Fin</ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY HH:mm"
                         pickerFormat="MMM D:HH:mm"
-                        name="endTime" 
+                        name="endTime"
+                        month-names="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto,
+                                     Septiembre, Octubre, Noviembre, Diciembre"
+                        month-short-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                        cancelText="Atrás"
+                        doneText="Tomar"
                         [(ngModel)]="event.endTime" 
-                        [min]="minDate" >
+                         >
           </ion-datetime>
       </ion-item>
       <ion-button  fill="outline"

@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageModule } from './login/login.module';
 import { PacientesService } from './services/pacientes.service';
-import { RegistrationPatientComponent } from './registration-patient/registration-patient.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -18,11 +17,10 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { Dialogs } from '@ionic-native/dialogs/ngx';
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationPatientComponent
   ],
   entryComponents: [],
   imports: [
@@ -35,14 +33,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     PacientesService,
     CallNumber,
-    Network
+    Network,
+    Dialogs
   ],
   bootstrap: [AppComponent]
 })

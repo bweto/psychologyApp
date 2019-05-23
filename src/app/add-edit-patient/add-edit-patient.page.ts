@@ -2,7 +2,7 @@ import { AuthService } from './../services/auth.service';
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import {PacientesService} from '../services/pacientes.service';
 
 @Component({

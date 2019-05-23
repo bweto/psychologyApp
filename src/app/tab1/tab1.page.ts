@@ -5,7 +5,7 @@ import { Component,
           LOCALE_ID} from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { formatDate} from '@angular/common';
 import { AuthService } from './../services/auth.service';
 import { PacientesService } from '../services/pacientes.service';
@@ -36,7 +36,7 @@ export class Tab1Page implements OnInit{
   email = '';
   nombre = '';
   viewTitle = '';
-  minDate = new Date().toISOString();
+  //minDate = new Date().toISOString();
   @ViewChild(CalendarComponent) cal: CalendarComponent;
   constructor(private router: Router,
               private alertCtrl: AlertController,
@@ -44,6 +44,7 @@ export class Tab1Page implements OnInit{
               private authService: AuthService,
               private pacientesService: PacientesService,
               private citaService: CitaService,
+              private toastController: ToastController
     ) { }
 
     ngOnInit() {
@@ -52,7 +53,7 @@ export class Tab1Page implements OnInit{
       this.obtenerPacientes();
       this.resetEvent();
       this.cal.loadEvents();
-      
+
     }
     resetEvent() {
       this.event = {
@@ -79,6 +80,7 @@ export class Tab1Page implements OnInit{
         this.crearCita(newCita);
         this.cal.loadEvents();
         this.resetEvent();
+        this.presentToast('Creaste una cita de forma exitosa', 'success');
     }
 
     changeMode(mode: string) {
@@ -120,7 +122,7 @@ export class Tab1Page implements OnInit{
           paciente.forEach(data => {
             const paciente = data.payload.doc.data();
             const name = `${paciente['name']} ${paciente['lastName']}`;
-            const id = data.payload.doc.id
+            const id = data.payload.doc.id;
             if (this.nombresPacientes === undefined) {
               this.nombresPacientes = [];
             }
@@ -129,7 +131,7 @@ export class Tab1Page implements OnInit{
               }
               this.nombresPacientes = this.nombresPacientes.filter((item, index, array) => {
                 return array.indexOf(item) === index;
-              })
+              });
           });
         });
     }
@@ -149,19 +151,31 @@ export class Tab1Page implements OnInit{
                 const fin = cita['endTime'].toDate();
                 cita['startTime'] = start;
                 cita['endTime'] = fin;
-                if(this.eventSource === undefined){
+                if (this.eventSource === undefined) {
                   this.eventSource = [];
                 }
                 this.eventSource.push(cita);
               }
           });
         });
-        
     }
 
     salir() {
       this.authService.salir();
       this.router.navigate(['/login']);
     }
+
+    async presentToast(msg: string, color: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      animated: true,
+      color: color,
+      keyboardClose: true,
+      position: 'top',
+      mode: 'ios',
+    });
+    toast.present();
+  }
 
 }
